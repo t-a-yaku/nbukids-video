@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>НБУ для дітей — Відеотека</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f172a;--surf:#1e293b;--surf2:#273549;--brd:rgba(255,255,255,.08);--blue:#3b82f6;--yellow:#fbbf24;--teal:#14b8a6;--purple:#a855f7;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--muted:#94a3b8;--r:14px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:linear-gradient(160deg,#0f172a 0%,#1a2744 100%);border-bottom:1px solid var(--brd);padding:1.8rem 1.5rem 2.2rem;text-align:center;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 120% at 50% -20%,rgba(59,130,246,.13) 0%,transparent 65%);pointer-events:none}
+.flag{display:flex;height:5px;margin-bottom:1.6rem}
+.flag .b{flex:1;background:#005BBB}.flag .y{flex:1;background:#FFD700}
+.h-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25);border-radius:30px;padding:.25rem .85rem;font-size:.72rem;font-weight:700;color:var(--yellow);margin-bottom:.9rem;position:relative}
+header h1{font-family:'Unbounded',sans-serif;font-size:clamp(1.4rem,3.5vw,2.5rem);font-weight:900;line-height:1.2;color:var(--text);margin-bottom:.6rem;position:relative}
+header h1 em{color:var(--yellow);font-style:normal}
+header p{color:var(--muted);font-size:.9rem;position:relative}
+.tabs{display:flex;overflow-x:auto;gap:.4rem;padding:.9rem 1.2rem;background:var(--surf);border-bottom:1px solid var(--brd);position:sticky;top:0;z-index:200;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1rem;border-radius:30px;border:1.5px solid var(--brd);background:transparent;color:var(--muted);font:700 .75rem 'Nunito',sans-serif;cursor:pointer;white-space:nowrap;transition:.18s;flex-shrink:0}
+.tab:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
+.tab.active{color:var(--text)!important}
+.tab .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.section{display:none}.section.visible{display:block}
+/* HUB */
+.hub{padding:1.8rem 1.5rem;max-width:1100px;margin:0 auto}
+.sec-title{font-family:'Unbounded',sans-serif;font-size:.65rem;font-weight:700;color:var(--yellow);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(251,191,36,.4),transparent)}
+.stats-strip{display:flex;flex-wrap:wrap;gap:1rem;background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:.9rem 1.3rem;margin-bottom:1.8rem}
+.sstat{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--muted)}
+.sstat strong{color:var(--text);font-weight:800}
+.block-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem;margin-bottom:2rem}
+.bcard{background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);padding:1.3rem;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.bcard:hover{border-color:rgba(255,255,255,.2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.bcard-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.bcard-icon{font-size:1.8rem;margin-bottom:.6rem;display:block}
+.bcard-name{font-family:'Unbounded',sans-serif;font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+.bcard-desc{font-size:.75rem;color:var(--muted);line-height:1.5;margin-bottom:.8rem}
+.bcard-meta{display:flex;align-items:center;justify-content:space-between;font-size:.7rem}
+.bcard-cnt{color:var(--muted)}
+.bcard-arrow{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:.15s}
+.bcard:hover .bcard-arrow{transform:translateX(3px)}
+/* GEO */
+.geo-wrap{padding:1.2rem 1.5rem;max-width:1280px;margin:0 auto}
+.layer-switch{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.layer-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.38rem 1rem;border-radius:30px;border:1.5px solid var(--brd);background:transparent;color:var(--muted);font:700 .76rem 'Nunito',sans-serif;cursor:pointer;transition:.15s}
+.layer-btn:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
+.geo-grid{display:grid;grid-template-columns:1fr 370px;gap:1.3rem}
+@media(max-width:880px){.geo-grid{grid-template-columns:1fr}.geo-side{order:-1}}
+.map-panel{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:1rem}
+.map-legend{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:.8rem;font-size:.72rem;color:var(--muted);align-items:center}
+.leg{display:flex;align-items:center;gap:.35rem}
+.leg-dot{width:9px;height:9px;border-radius:50%}
+#map-wrap{position:relative;width:100%;user-select:none}
+svg#umap{width:100%;height:auto;display:block}
+svg#umap path{fill:#1e3a5f;stroke:#2d5a8e;stroke-width:.8;cursor:pointer;transition:fill .2s,stroke .2s,filter .2s}
+svg#umap path.has-travel{fill:#1d4ed8;stroke:#60a5fa;stroke-width:1.1}
+svg#umap path.has-rivers{fill:#0e7490;stroke:#22d3ee;stroke-width:1.1}
+svg#umap path.has-both{fill:#1e40af;stroke:var(--yellow);stroke-width:1.3}
+svg#umap path:hover{fill:#2563eb;stroke:#93c5fd;filter:drop-shadow(0 0 5px rgba(59,130,246,.45))}
+svg#umap path.active{fill:#1e40af!important;stroke:var(--yellow)!important;stroke-width:2!important;filter:drop-shadow(0 0 8px rgba(251,191,36,.4))!important}
+svg#umap path.no-data{fill:#1e3a5f;stroke:#2d5a8e;opacity:1}
+svg#umap path.no-data:hover{fill:#1a2744;stroke:#233044;filter:none}
+#tooltip{position:fixed;background:var(--surf2);border:1px solid var(--brd);color:var(--text);padding:.35rem .75rem;border-radius:8px;font-size:.75rem;font-weight:600;pointer-events:none;z-index:999;opacity:0;transition:opacity .15s;white-space:nowrap}
+.geo-side{display:flex;flex-direction:column;gap:1rem}
+.stats-box{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);padding:.9rem 1.1rem}
+.stats-box h3{font-family:'Unbounded',sans-serif;font-size:.62rem;font-weight:700;color:var(--yellow);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:.28rem 0;border-bottom:1px solid var(--brd);font-size:.8rem}
+.stat-row:last-child{border-bottom:none}
+.stat-row span:last-child{font-weight:800;color:var(--blue)}
+.region-panel{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);flex:1;overflow:hidden}
+.region-hdr{padding:.9rem 1.1rem;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:.6rem}
+.region-ico{width:34px;height:34px;background:linear-gradient(135deg,#1d4ed8,#3b82f6);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.region-name{font-family:'Unbounded',sans-serif;font-size:.82rem;font-weight:700}
+.region-cnt{font-size:.72rem;color:var(--muted);margin-top:.1rem}
+.region-search{padding:.6rem .9rem;border-bottom:1px solid var(--brd);display:none}
+.region-search input{width:100%;background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:.38rem .75rem;color:var(--text);font:600 .82rem 'Nunito',sans-serif;outline:none;transition:.2s}
+.region-search input:focus{border-color:var(--blue)}
+.region-search input::placeholder{color:var(--muted)}
+.video-list{overflow-y:auto;max-height:480px;padding:.5rem}
+.vcard{display:flex;gap:.6rem;padding:.55rem;border-radius:9px;cursor:pointer;transition:background .15s;margin-bottom:.25rem;border:1px solid transparent}
+.vcard:hover{background:var(--surf2)}
+.vcard.playing{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.25)}
+.vthumb{width:88px;height:52px;border-radius:6px;overflow:hidden;flex-shrink:0;background:var(--bg);position:relative}
+.vthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.vthumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);opacity:0;transition:.15s;font-size:.85rem}
+.vcard:hover .vthumb-play{opacity:1}
+.vcard-tag{position:absolute;bottom:2px;right:3px;font-size:.55rem;font-weight:700;padding:.1rem .35rem;border-radius:4px}
+.vinfo{flex:1;min-width:0}
+.vtitle{font-size:.74rem;font-weight:700;line-height:1.35;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.2rem}
+.vloc{font-size:.66rem;color:var(--muted)}
+.hint-panel{padding:1.8rem 1rem;text-align:center;color:var(--muted)}
+.hint-panel .hi{font-size:2.2rem;margin-bottom:.6rem;opacity:.5}
+.hint-panel p{font-size:.8rem;line-height:1.6}
+.chips-wrap{max-width:1280px;margin:0 auto;padding:.8rem 1.5rem 1.5rem}
+.chips-title{font-family:'Unbounded',sans-serif;font-size:.62rem;font-weight:700;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;display:flex;align-items:center;gap:.6rem}
+.chips-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(59,130,246,.35),transparent)}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{display:inline-flex;align-items:center;gap:.35rem;padding:.32rem .85rem;border-radius:30px;border:1px solid var(--brd);background:var(--surf);color:var(--text);font-size:.73rem;font-weight:700;cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--blue);color:#60a5fa;background:rgba(59,130,246,.07)}
+.chip .cc{opacity:.55;font-weight:600}
+.player-section{max-width:1280px;margin:0 auto;padding:0 1.5rem 1.5rem;display:none}
+.player-section.on{display:block}
+.player-wrap{background:var(--surf);border:1px solid var(--brd);border-radius:var(--r);overflow:hidden}
+.player-hdr{padding:.75rem 1.2rem;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:.6rem}
+.now-label{font-size:.68rem;font-weight:700;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;background:rgba(59,130,246,.12);padding:.18rem .55rem;border-radius:20px}
+.player-title{font-family:'Unbounded',sans-serif;font-size:.82rem;font-weight:700;flex:1}
+.player-close{background:rgba(255,255,255,.08);border:none;color:var(--muted);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:.15s}
+.player-close:hover{background:var(--red);color:#fff}
+.player-vid{aspect-ratio:16/9;background:#000}
+.player-vid iframe{width:100%;height:100%;display:block;border:none}
+.player-foot{padding:.7rem 1.2rem;border-top:1px solid var(--brd);display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.player-loc{font-size:.78rem;color:var(--muted);margin-right:auto}
+.btn-link{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .8rem;border-radius:8px;font:700 .72rem 'Nunito',sans-serif;text-decoration:none;transition:.15s}
+.btn-yt{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.22);color:#f87171}
+.btn-yt:hover{background:rgba(239,68,68,.2)}
+/* TALES */
+.tales-wrap{padding:1.5rem;max-width:1200px;margin:0 auto}
+.tales-hdr{margin-bottom:1.2rem}
+.tales-hdr h2{font-family:'Unbounded',sans-serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:900;margin-bottom:.35rem}
+.tales-hdr p{color:var(--muted);font-size:.88rem}
+.tales-tabs{display:flex;gap:.5rem;margin-bottom:1.3rem;flex-wrap:wrap}
+.tale-tab{display:inline-flex;align-items:center;gap:.4rem;padding:.42rem 1.1rem;border-radius:30px;border:1.5px solid var(--brd);background:transparent;color:var(--muted);font:700 .78rem 'Nunito',sans-serif;cursor:pointer;transition:.18s}
+.tale-tab:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+.tale-tab.active{color:var(--text)}
+.tales-search{position:relative;margin-bottom:1.2rem;max-width:440px}
+.tales-search input{width:100%;background:var(--surf);border:1.5px solid var(--brd);border-radius:40px;padding:.55rem 1rem .55rem 2.4rem;color:var(--text);font:600 .88rem 'Nunito',sans-serif;outline:none;transition:.2s}
+.tales-search input:focus{border-color:var(--purple)}
+.tales-search input::placeholder{color:var(--muted)}
+.tales-search .si{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.tales-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.tcard{background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;animation:up .32s ease both}
+.tcard:hover{transform:translateY(-4px);box-shadow:0 8px 22px rgba(0,0,0,.25);border-color:rgba(255,255,255,.15)}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.tcard-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000}
+.tcard-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .32s}
+.tcard:hover .tcard-thumb img{transform:scale(1.06)}
+.tcard-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:.2s}
+.tcard:hover .tcard-ov{opacity:1}
+.tcard-play{width:42px;height:42px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;padding-left:3px;box-shadow:0 4px 14px rgba(168,85,247,.5)}
+.tcard-badge{position:absolute;top:.45rem;left:.45rem;font-size:.6rem;font-weight:700;padding:.18rem .5rem;border-radius:20px;backdrop-filter:blur(6px)}
+.tcard-body{padding:.7rem .85rem .85rem}
+.tcard-title{font-family:'Unbounded',sans-serif;font-size:.73rem;font-weight:700;line-height:1.4;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* PROF */
+.prof-wrap{padding:1.5rem;max-width:1200px;margin:0 auto}
+.prof-hdr{margin-bottom:1.2rem}
+.prof-hdr h2{font-family:'Unbounded',sans-serif;font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:900;margin-bottom:.35rem}
+.prof-hdr p{color:var(--muted);font-size:.88rem}
+.prof-search{position:relative;margin-bottom:1.2rem;max-width:440px}
+.prof-search input{width:100%;background:var(--surf);border:1.5px solid var(--brd);border-radius:40px;padding:.55rem 1rem .55rem 2.4rem;color:var(--text);font:600 .88rem 'Nunito',sans-serif;outline:none;transition:.2s}
+.prof-search input:focus{border-color:var(--orange)}
+.prof-search input::placeholder{color:var(--muted)}
+.prof-search .si{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.cat-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.2rem}
+.ccat{display:inline-flex;align-items:center;gap:.3rem;padding:.32rem .82rem;border-radius:30px;border:1.5px solid var(--brd);background:transparent;color:var(--muted);font:700 .72rem 'Nunito',sans-serif;cursor:pointer;transition:.15s;white-space:nowrap}
+.ccat:hover{color:var(--text);border-color:rgba(255,255,255,.2)}
+.ccat.active{color:var(--text)}
+.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+.pcard{background:var(--surf);border:1.5px solid var(--brd);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;animation:up .32s ease both}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 8px 22px rgba(0,0,0,.25);border-color:rgba(255,255,255,.15)}
+.pcard-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000}
+.pcard-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .32s}
+.pcard:hover .pcard-thumb img{transform:scale(1.06)}
+.pcard-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.4);opacity:0;transition:.2s}
+.pcard:hover .pcard-ov{opacity:1}
+.pcard-play{width:42px;height:42px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;padding-left:3px;box-shadow:0 4px 14px rgba(249,115,22,.5)}
+.pcard-cat{position:absolute;top:.45rem;left:.45rem;font-size:.6rem;font-weight:700;padding:.18rem .5rem;border-radius:20px;backdrop-filter:blur(6px)}
+.pcard-body{padding:.7rem .85rem .85rem}
+.pcard-title{font-family:'Unbounded',sans-serif;font-size:.73rem;font-weight:700;line-height:1.4;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:.25rem}
+.pcard-desc{font-size:.68rem;color:var(--muted);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.empty{text-align:center;padding:3rem 1rem;color:var(--muted)}
+.empty .ei{font-size:2.5rem;margin-bottom:.6rem}
+.coming-soon{text-align:center;padding:3rem 1rem;color:var(--muted)}
+.coming-soon .cs-icon{font-size:3rem;margin-bottom:.8rem}
+.coming-soon h3{font-family:'Unbounded',sans-serif;font-size:.9rem;color:var(--text);margin-bottom:.5rem}
+.coming-soon p{font-size:.82rem;line-height:1.6;max-width:380px;margin:0 auto}
+.coming-soon .pl-link{display:inline-block;margin-top:1rem;padding:.4rem 1rem;border-radius:8px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#60a5fa;font:700 .78rem 'Nunito',sans-serif;text-decoration:none;transition:.15s}
+.coming-soon .pl-link:hover{background:rgba(59,130,246,.22)}
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:1000;align-items:center;justify-content:center;padding:1rem}
+.modal-ov.open{display:flex}
+.modal-box{background:var(--surf);border-radius:var(--r);width:100%;max-width:820px;overflow:hidden;position:relative;animation:mopen .22s ease}
+@keyframes mopen{from{transform:scale(.93);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-vid{aspect-ratio:16/9;background:#000}
+.modal-vid iframe{width:100%;height:100%;display:block;border:none}
+.modal-info{padding:.9rem 1.2rem}
+.modal-info h3{font-family:'Unbounded',sans-serif;font-size:.88rem;color:var(--text);margin-bottom:.3rem}
+.modal-info p{font-size:.78rem;color:var(--muted);line-height:1.55}
+.modal-foot{padding:.6rem 1.2rem;border-top:1px solid var(--brd);display:flex;align-items:center;gap:.5rem}
+.modal-close{position:absolute;top:.55rem;right:.55rem;background:rgba(0,0,0,.5);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;transition:.15s;z-index:1}
+.modal-close:hover{background:var(--red)}
+footer{background:var(--surf);border-top:1px solid var(--brd);text-align:center;padding:1.3rem 1rem;font-size:.73rem;color:var(--muted);margin-top:1.5rem}
+footer a{color:var(--yellow);text-decoration:none}
+footer strong{color:var(--text)}
+</style>
+</head>
+<body>
+<header>
+  <div class="flag"><div class="b"></div><div class="y"></div></div>
+  <div class="h-badge">&#128218; Національна бібліотека України для дітей</div>
+  <h1>НБУ <em>Відеотека</em></h1>
+  <p>Освітні та розважальні відео для дітей — безплатно для всіх</p>
+</header>
+<nav class="tabs" id="nav-tabs">
+  <button class="tab active" data-sec="hub" onclick="goTo('hub',this)" style="background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.3);color:var(--yellow)"><span class="dot" style="background:var(--yellow)"></span>Головна</button>
+  <button class="tab" data-sec="geo" onclick="goTo('geo',this)"><span class="dot" style="background:#3b82f6"></span>&#128506; Географія</button>
+  <button class="tab" data-sec="tales" onclick="goTo('tales',this)"><span class="dot" style="background:var(--purple)"></span>&#129498; Казки</button>
+  <button class="tab" data-sec="prof" onclick="goTo('prof',this)"><span class="dot" style="background:var(--orange)"></span>&#128188; Професії</button>
+</nav>
+
+<!-- HUB -->
+<div class="section visible" id="sec-hub">
+<div class="hub">
+  <div class="stats-strip">
+    <div class="sstat">&#127909; <strong>150+</strong> відео</div>
+    <div class="sstat">&#128203; <strong>5</strong> плейлистів</div>
+    <div class="sstat">&#128506; <strong>13</strong> областей на карті</div>
+    <div class="sstat">&#127359; <strong>Безплатно</strong></div>
+  </div>
+  <div class="sec-title">Розділи відеотеки</div>
+  <div class="block-cards">
+    <div class="bcard" onclick="goTo('geo',getTab('geo'))">
+      <div class="bcard-bar" style="background:linear-gradient(90deg,#1d4ed8,#60a5fa)"></div>
+      <span class="bcard-icon">&#128506;</span>
+      <div class="bcard-name">Географія України</div>
+      <div class="bcard-desc">Інтерактивна карта — міста і замки областей, річки і моря</div>
+      <div class="bcard-meta"><span class="bcard-cnt">2 плейлисти · 13 областей</span><div class="bcard-arrow" style="background:rgba(59,130,246,.15);color:#60a5fa">→</div></div>
+    </div>
+    <div class="bcard" onclick="goTo('tales',getTab('tales'))">
+      <div class="bcard-bar" style="background:linear-gradient(90deg,#7c3aed,#c084fc)"></div>
+      <span class="bcard-icon">&#129498;</span>
+      <div class="bcard-name">Казки</div>
+      <div class="bcard-desc">«Казка на ніч» та «Візок добрих казок» — обидва плейлисти в одному місці</div>
+      <div class="bcard-meta"><span class="bcard-cnt">2 плейлисти</span><div class="bcard-arrow" style="background:rgba(168,85,247,.15);color:#c084fc">→</div></div>
+    </div>
+    <div class="bcard" onclick="goTo('prof',getTab('prof'))">
+      <div class="bcard-bar" style="background:linear-gradient(90deg,#c2410c,#fb923c)"></div>
+      <span class="bcard-icon">&#128188;</span>
+      <div class="bcard-name">Світ професій</div>
+      <div class="bcard-desc">Профорієнтаційні відео — знайди свою майбутню спеціальність</div>
+      <div class="bcard-meta"><span class="bcard-cnt">19 відео · 6 категорій</span><div class="bcard-arrow" style="background:rgba(249,115,22,.15);color:#fb923c">→</div></div>
+    </div>
+    <div class="bcard" style="opacity:.45;cursor:default;border-style:dashed">
+      <span class="bcard-icon">&#10133;</span>
+      <div class="bcard-name">Новий розділ</div>
+      <div class="bcard-desc">Тут з'явиться наступний плейлист</div>
+      <div class="bcard-meta"><span class="bcard-cnt" style="color:var(--yellow)">Незабаром…</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- GEO -->
+<div class="section" id="sec-geo">
+<div class="geo-wrap">
+  <div class="layer-switch">
+    <button class="layer-btn active" id="layer-travel" onclick="setLayer('travel',this)" style="background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);color:#60a5fa">&#128506; Подорожуємо Україною</button>
+    <button class="layer-btn" id="layer-rivers" onclick="setLayer('rivers',this)">&#128167; Водні артерії</button>
+    <button class="layer-btn" id="layer-both" onclick="setLayer('both',this)">&#10024; Обидва шари</button>
+  </div>
+  <div class="geo-grid">
+    <div class="map-panel">
+      <div class="map-legend">
+        <span style="font-family:'Unbounded',sans-serif;font-size:.6rem;color:var(--yellow);letter-spacing:.08em;text-transform:uppercase">Карта</span>
+        <div class="leg"><div class="leg-dot" style="background:#1d4ed8"></div>Подорожі</div>
+        <div class="leg"><div class="leg-dot" style="background:#0e7490"></div>Водні арт.</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--yellow)"></div>Обидва</div>
+      </div>
+      <div id="map-wrap">
+        <div id="svg-placeholder" style="aspect-ratio:800/530;background:var(--surf2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.82rem;flex-direction:column;gap:.5rem">
+          <span style="font-size:2rem">&#128506;</span>
+          <span>Помістіть <strong style="color:var(--text)">_ukraine_map.html</strong> поруч з цим файлом</span>
+        </div>
+      </div>
+    </div>
+    <div class="geo-side">
+      <div class="stats-box">
+        <h3>&#128202; Статистика</h3>
+        <div class="stat-row"><span>Подорожуємо Україною</span><span>100+ відео</span></div>
+        <div class="stat-row"><span>Водні артерії</span><span id="s-rivers">5 відео</span></div>
+        <div class="stat-row"><span>Областей на карті</span><span>13</span></div>
+        <div class="stat-row"><span>Канал</span><span><a href="https://youtube.com/@nbukids" target="_blank" style="color:var(--blue)">@nbukids</a></span></div>
+      </div>
+      <div class="region-panel" id="region-panel">
+        <div class="region-hdr">
+          <div class="region-ico" id="r-ico">&#128506;</div>
+          <div><div class="region-name" id="r-name">Оберіть область</div><div class="region-cnt" id="r-cnt">Натисніть на карту</div></div>
+        </div>
+        <div class="region-search" id="r-search"><input type="text" id="r-input" placeholder="&#128269; Пошук по відео…" oninput="filterGeo()"></div>
+        <div class="video-list" id="v-list">
+          <div class="hint-panel"><div class="hi">&#128070;</div><p>Оберіть область на карті — тут з'являться відео про її міста, річки та місця</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="chips-wrap">
+  <div class="chips-title">Усі регіони</div>
+  <div class="chips" id="chips"></div>
+</div>
+<div class="player-section" id="geo-player">
+  <div class="player-wrap">
+    <div class="player-hdr">
+      <span class="now-label">&#9654; Зараз грає</span>
+      <span class="player-title" id="p-title">–</span>
+      <button class="player-close" onclick="closeGeoPlayer()">✕</button>
+    </div>
+    <div class="player-vid"><iframe id="p-frame" src="" allowfullscreen allow="autoplay"></iframe></div>
+    <div class="player-foot">
+      <span class="player-loc" id="p-loc"></span>
+      <a class="btn-link btn-yt" id="p-yt" href="#" target="_blank">&#9654; YouTube &#8599;</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- TALES -->
+<div class="section" id="sec-tales">
+<div class="tales-wrap">
+  <div class="tales-hdr"><h2>&#129498; Казки</h2><p>Чарівні казкові відео від бібліотеки</p></div>
+  <div class="tales-tabs">
+    <button class="tale-tab active" data-tale="bedtime" onclick="setTaleTab('bedtime',this)" style="background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.3);color:#c084fc">&#127769; Казка на ніч</button>
+    <button class="tale-tab" data-tale="cart" onclick="setTaleTab('cart',this)">&#128722; Візок добрих казок</button>
+  </div>
+  <div class="tales-search"><span class="si">&#128269;</span><input type="text" id="tale-search" placeholder="Пошук казки…" oninput="filterTales()"></div>
+  <div class="tales-grid" id="tales-grid"></div>
+  <div class="empty" id="tales-empty" style="display:none"><div class="ei">&#128269;</div><p>Нічого не знайдено</p></div>
+</div>
+</div>
+
+<!-- PROF -->
+<div class="section" id="sec-prof">
+<div class="prof-wrap">
+  <div class="prof-hdr"><h2>&#128188; Світ професій у кадрі</h2><p>Дізнайся про різні спеціальності — знайди свій шлях</p></div>
+  <div class="prof-search"><span class="si">&#128269;</span><input type="text" id="prof-search" placeholder="Пошук по професіях…" oninput="filterProf()"></div>
+  <div class="cat-row" id="cat-row"></div>
+  <div class="prof-grid" id="prof-grid"></div>
+  <div class="empty" id="prof-empty" style="display:none"><div class="ei">&#128269;</div><p>Нічого не знайдено</p></div>
+</div>
+</div>
+
+<footer>
+  <strong>Національна бібліотека України для дітей</strong><br>
+  вул. Януша Корчака, 60, Київ &nbsp;|&nbsp;
+  <a href="https://chl.kiev.ua" target="_blank">chl.kiev.ua</a> &nbsp;|&nbsp;
+  <a href="https://youtube.com/@nbukids" target="_blank">@nbukids</a>
+</footer>
+
+<div class="modal-ov" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-vid"><iframe id="m-frame" src="" allowfullscreen allow="autoplay"></iframe></div>
+    <div class="modal-info"><h3 id="m-title"></h3><p id="m-desc"></p></div>
+    <div class="modal-foot"><span id="m-badge" style="font-size:.72rem;color:var(--muted)"></span><a id="m-yt" class="btn-link btn-yt" href="#" target="_blank" style="margin-left:auto">&#9654; YouTube &#8599;</a></div>
+  </div>
+</div>
+<div id="tooltip"></div>
+
+<script>
+// ── TRAVEL DATA
+const TRAVEL={
+  "Рівненська область":[
+    {id:"FuZwm9S7uuA",title:"Замки Рівненщини",loc:"Рівненська область"},
+    {id:"km-BnljwwxE",title:"Костопіль — поліський край",loc:"Костопіль, Рівненська область"},
+    {id:"AFwMnReJb-0",title:"Острог — місто просвітництва",loc:"Острог, Рівненська область"},
+    {id:"b1Zpk195wcg",title:"Дубно — найдревніше місто Волині",loc:"Дубно, Рівненська область"},
+    {id:"FZ0zhKQ1lKs",title:"Рівне — архітектурна перлина",loc:"Рівне"},
+    {id:"SQgZDf1xBZU",title:"Місто Рівне — ЧаРівне",loc:"Рівне"},
+    {id:"_t9kXKB_4yI",title:"То моє Рівне!",loc:"Рівне"},
+    {id:"HmbohrWbBl8",title:"Цікаві факти про Рівне",loc:"Рівне"},
+  ],
+  "Черкаська область":[
+    {id:"d_rRouzhHbo",title:"Палаци і замки Черкащини",loc:"Черкаська область"},
+    {id:"4F2ykUeCHkc",title:"Черкащина. Цікаві факти",loc:"Черкаська область"},
+    {id:"ZLj3R3jQSK8",title:"Умань — туристична мекка України",loc:"Умань"},
+    {id:"yyWqpyWf32g",title:"Чигирин — місто козацької слави",loc:"Чигирин"},
+    {id:"UO_UG2yPC7A",title:"Канів — святиня Шевченка",loc:"Канів"},
+    {id:"RVH9QzQc05A",title:"Черкаси — Дніпровська перлина",loc:"Черкаси"},
+  ],
+  "Чернігівська область":[
+    {id:"arvIK20gJqA",title:"Чернігівщина. Цікаві факти",loc:"Чернігівська область"},
+    {id:"xpr4JMzkIjs",title:"Новгород-Сіверський",loc:"Новгород-Сіверський"},
+    {id:"2zyzJFhGnKw",title:"Прилуки — Маленький Париж",loc:"Прилуки"},
+    {id:"mOvw1f4X0mY",title:"Ніжин — грецька столиця",loc:"Ніжин"},
+    {id:"_4jhhJhhWzo",title:"Батурин — серце гетьманщини",loc:"Батурин"},
+    {id:"HnVqHyp_hYw",title:"Чернігів — місто легенд та храмів",loc:"Чернігів"},
+  ],
+  "Тернопільська область":[
+    {id:"fF-YC6n4re4",title:"Заліщики",loc:"Заліщики"},
+    {id:"TXQM5Jb7Ux8",title:"Бережани — місто-фаворит",loc:"Бережани"},
+    {id:"E_mQKHbTSPs",title:"Тернопільщина: Цікаві факти",loc:"Тернопільська область"},
+    {id:"E-fnoG1AoVA",title:"Замки Тернопілля",loc:"Тернопільська область"},
+    {id:"eO1Jfa8RznU",title:"Кременець",loc:"Кременець"},
+    {id:"mckpD0H7vRk",title:"Збараж — феноменальна пам'ятка",loc:"Збараж"},
+    {id:"v3W9pnr35D0",title:"Бучач — антикварний салон",loc:"Бучач"},
+    {id:"ABJmdv6xfTk",title:"Тернопіль",loc:"Тернопіль"},
+  ],
+  "Миколаївська область":[
+    {id:"eai8N82Q4bc",title:"Очаків — місто Причорномор'я",loc:"Очаків"},
+    {id:"YKrVMy9mWfg",title:"Миколаївщина. Цікаві факти",loc:"Миколаївська область"},
+    {id:"3vabh0v3RwY",title:"Первомайськ — місто трьох держав",loc:"Первомайськ"},
+    {id:"-TrvAqmGqu4",title:"Миколаїв — корабельна столиця",loc:"Миколаїв"},
+    {id:"yNz2pNQHfmY",title:"Вознесенськ",loc:"Вознесенськ"},
+  ],
+  "Івано-Франківська область":[
+    {id:"r3M94H_h3tU",title:"Івано-Франківщина. Цікаві факти",loc:"Івано-Франківська область"},
+    {id:"GVTjKavUwXk",title:"Коломия — центр Покуття",loc:"Коломия"},
+    {id:"eHdjXkLx2yE",title:"Косів — столиця сувенірів",loc:"Косів"},
+    {id:"675nAyKan28",title:"Галич — серце Прикарпаття",loc:"Галич"},
+    {id:"27KxYlC35Fk",title:"Калуш — сучасне місто",loc:"Калуш"},
+    {id:"OTZvvOtacIA",title:"Івано-Франківськ — ворота Карпат",loc:"Івано-Франківськ"},
+  ],
+  "Кіровоградська область":[
+    {id:"76W6LrdYD_U",title:"Кіровоградщина. Цікаві факти",loc:"Кіровоградська область"},
+    {id:"5JOGdCUZRhw",title:"Новомиргород",loc:"Новомиргород"},
+    {id:"QxrYafTHJrg",title:"Знам'янка — перлина Чорнолісся",loc:"Знам'янка"},
+    {id:"1jBVFCIwT0w",title:"Гайворон — місто відкриттів",loc:"Гайворон"},
+    {id:"StBcjsLKubM",title:"Олександрія — козацька історія",loc:"Олександрія"},
+    {id:"8xEgdh9mkD0",title:"Кропивницький — театральна столиця",loc:"Кропивницький"},
+  ],
+  "Волинська область":[
+    {id:"YaI2vQ455dA",title:"Волинь. Цікаві факти",loc:"Волинська область"},
+    {id:"Mhjutr6KhYg",title:"Камінь-Каширський — перлина Полісся",loc:"Камінь-Каширський"},
+    {id:"yXLSXcPiM7M",title:"Любомль — місто волинського князя",loc:"Любомль"},
+    {id:"Kyw0FF-XejQ",title:"Ковель — ворота в Європу",loc:"Ковель"},
+    {id:"-IRQMRKmMtI",title:"Володимир — княжа столиця Волині",loc:"Володимир"},
+    {id:"BDnQqqmf5D8",title:"Луцьк — перлина на березі Стиру",loc:"Луцьк"},
+    {id:"4wUavlTRbN0",title:"Зимне — колиска Волині",loc:"Зимне"},
+  ],
+  "Закарпатська область":[
+    {id:"m6dJhISJIN0",title:"Закарпаття. Цікаві факти",loc:"Закарпатська область"},
+    {id:"ki0-17T5lKQ",title:"Рахів — найвисокогірніше місто",loc:"Рахів"},
+    {id:"t3DCg0P4Lzg",title:"Виноградів — королівське місто",loc:"Виноградів"},
+    {id:"lpToP29XFuU",title:"Хуст",loc:"Хуст"},
+    {id:"JzHZimP3g40",title:"Мукачево",loc:"Мукачево"},
+    {id:"JA8tSte-uJU",title:"Ужгород — перлина Закарпаття",loc:"Ужгород"},
+    {id:"2MUShXN5JsU",title:"Підполоззя — райський куточок",loc:"Підполоззя"},
+    {id:"3OWRmCfjkCE",title:"Мальовниче село Білки",loc:"Білки"},
+  ],
+  "Полтавська область":[
+    {id:"cFsJnFYdchw",title:"Полтавщина. Цікаві факти",loc:"Полтавська область"},
+    {id:"2774DcLIIw8",title:"Кременчук — промислове серце",loc:"Кременчук"},
+    {id:"zNjcCj5xK4M",title:"Миргород — місто миру",loc:"Миргород"},
+    {id:"_hQVfZFdGAw",title:"Гадяч — козацька слава",loc:"Гадяч"},
+    {id:"BqZxf5deWlY",title:"Пирятин — зелена перлина",loc:"Пирятин"},
+    {id:"sLMwjQ4JTcQ",title:"Полтава — духовна столиця",loc:"Полтава"},
+  ],
+  "Харківська область":[
+    {id:"dFIdmEDX71g",title:"Харківщина. Цікаві факти",loc:"Харківська область"},
+    {id:"Pu5qKS8wxDc",title:"Ізюм — солодке місто",loc:"Ізюм"},
+    {id:"Yoenxo6jk1M",title:"Чугуїв — місто вражень",loc:"Чугуїв"},
+    {id:"LbPnCtO1b-0",title:"Краснокутськ — куточок Слобожанщини",loc:"Краснокутськ"},
+    {id:"8XkUUHRXxXI",title:"Красноград — місто-фортеця",loc:"Красноград"},
+    {id:"zQNrXGu192Q",title:"Харків — серце Слобідської України",loc:"Харків"},
+  ],
+  "Хмельницька область":[
+    {id:"Y6HLRfdoeGw",title:"Кам'янець-Подільський",loc:"Кам'янець-Подільський"},
+  ],
+  "Сумська область":[
+    {id:"0Mul1Aqkdxg",title:"Глухів — найдавніше місто",loc:"Глухів"},
+  ],
+};
+
+// ── RIVERS: заповнити після запуску nbukids_collector.py
+// Playlist ID: PLfN5ddjLy4TteE9gGsNft8gD0T7IGvNEk
+const RIVERS={
+  "Одеська область":[{id:"y9E-Qr9P8xY",title:"Дунай — блакитна артерія Європи",loc:"Дунай, Одеська область"}],
+  "Черкаська область":[{id:"2yfBa220uFg",title:"Багатолика Рось",loc:"Річка Рось, Черкаська область"}],
+  "Миколаївська область":[{id:"cBH_ZaTI__Y",title:"На берегах Південного Бугу",loc:"Південний Буг, Миколаївська область"}],
+  "Чернігівська область":[{id:"dwnt8cXV64U",title:"Зачарована Десна",loc:"Річка Десна, Чернігівська область"}],
+  "Дніпропетровська область":[{id:"SsgAqlmOag4",title:"На синіх хвилях Дніпра",loc:"Річка Дніпро"}]
+};
+
+// ── TALES: заповнити після запуску nbukids_collector.py
+// Казка на ніч: PLfN5ddjLy4TvE-2CQYt3OKl4i2FNmm3lG
+// Візок добрих казок: PLfN5ddjLy4TuU2NxfdzDaiAoe629tm0Q9
+const TALES={bedtime:[{"id":"XIL3ynOUgy0","title":"Як звірі океан рятували, або місія \"Чисті води\". Леся Кічура. Казкові намистинки для дитинки","desc":"Pапрошуємо вас послухати дивовижну морську історію казкарки Лесі Кічури разом із бібліотечною гостею – пані Зеброю! #казкові_намистинки"},
+{"id":"V0mi0DAiAiQ","title":"Вечірні слуханки. Сергій Пантюк","desc":"Напевно ви вже засумували за нашими вечірніми слуханками? Сьогодні до вас, наші любі читайлики, завітають у гості «колисанці, дрімотулі, пацькуни, спаткунці та соненятка», адже вам читатиме свою «Казо"},
+{"id":"oHHB3jlVsqg","title":"Вечірні слуханки. Тетяна Строкач. Нічка наступає","desc":"Сьогодні до нашого поетичного релаксу «Вечірні слуханки» знову долучилася дитяча українська письменниця Тетяна Строкач, яка прочитає  колискову зі своєї збірки «Веселковий дивосвіт». Ми впевнені, що н"},
+{"id":"mdx3pasiecI","title":"Про маленьку пташечку. Наталія Чуб. Корисна казка","desc":"кКазка «Про маленьку пташечку» сучасної дитячої письменниці, авторки захопливих пригодницьких творів і енциклопедій для дітей, психологині Наталії Чуб допоможе вашому малюку зробити перший крок, щоб з"},
+{"id":"qJcn1u9M1eA","title":"Я люблю тебе, мій Алфі! Корисна казка","desc":"Відео із циклу «Корисна казка» за книгою Анжели Макаллістер, Деніела Говарда"},
+{"id":"utzbLg8BWYY","title":"Віршик зранку до сніданку до Дня матері","desc":"Хто для кожного з нас наймиліший, найдобріший, найніжніший та найдорожчий у світі? Звісно, відповідь знає кожен. А хто ще не здогадався, обов’язково знайде її у новому випуску #віршикзранку_досніданку"},
+{"id":"o6DIss5-sGM","title":"Корисна казка. Анна Казаліс. Чисті зубки.","desc":"Як ви думаєте, чи корисно чистити зубки? Саме про це ви дізнаєтеся, прослухавши казку італійської письменниці Анни Казаліс із книги «Бабусині казки на добраніч». А читає її вам цього разу весела пані "},
+{"id":"lvyh78FGKRg","title":"Корисна казка. Капці для Святого Миколая","desc":"Одного разу приємний подарунок святому Миколаю вирішило зробити маленьке янголя. Вам цікаво, що саме воно подарувало господарю зимових свят?"},
+{"id":"Vxyyp7mCSWM","title":"Корисна казка. Битва тигренят","desc":"Казкова історія про веселих тигренят розповість маленьким читайликам, як малюки роблять свої перші кроки у мисливській справі. От цікаво, хто налякає допитливих смугастиків?  #кориснаказка"},
+{"id":"Azs-ngO2GwE","title":"Корисна казка. Непосидюче зебреня","desc":"Вам цікаво дізнатися, хто навчив зебреня образотворчому мистецтву? Тоді слухайте уважно корисну казку від пані Зебри!"},
+{"id":"L2H-xuW5m78","title":"Корисна казка. Пінгвінчик","desc":"Прослухавши корисну казочку від Міккі Мауса, ви дізнаєтесь, хто йому допоміг стати сміливим і впевненим. Книжка Наталії Чуб «Казки-вітамінчики» ще й дуже смачненька. Ви, мабуть, запитаєте «чому»? Слух"},
+{"id":"Y7lFUHcQQGA","title":"Корисна казка. Монстрик іде до школи.","desc":"День знань обов’язково відкриє свої обійми для допитливих хлопчиків та дівчат. А от малюк із книги Анни Льєнас «Монстрик іде до школи» взагалі нічого не чув про навчальний заклад. Чи сподобалась йому "},
+{"id":"9D01le8aTGw","title":"Добрі ліхтарики. Автор Наталія Чуб. Корисна казка","desc":"Казка «Добрі ліхтарики» письменниці Наталії Чуб допомагає маленькому вередливому конику Луї зрозуміти свої помилки і виправитись. От цікаво, яка сталася з ним пригода на ромашковій галявині? Послухайт"},
+{"id":"yK4TP_7RWXk","title":"Корисні казки від тітоньки Сови. Про слона-боягуза","desc":"А чи замислювалися ви про те, що казки можуть бути корисними? Так-так, вам не почулося, такі казки існують. Слухайте корисну казочку від пані Сови.  #кориснаказка #читацькамобілізація #літозкнигою"},
+{"id":"huBr7Pa2kc8","title":"Давай-но дружити! Автор Анастасія Меренкова. Корисна казка","desc":"Чи вмієте ви дружити? І чи знаєте цінність справжньої дружби? Якщо ні, то обов’язково прослухайте цікаву корисну казку Анастасії Меренкової «Давай-но дружити!» у виконанні ведмедика. #кориснаказка #чи"}],cart:[{"id":"T1AENf62qkY","title":"Візок добрих казок. Випуск 65. Як вовченя на літо образилося","desc":"Якось вовченя образилося на літо за те, що воно вчасно не поділилося промінням сонця. Друг їжачок підказав йому, як чинити в подібній ситуації. Чим закінчилася образа вовченяти, дивіться у новому 65-м"},
+{"id":"mS4luwDk9nM","title":"Друзі. Візок добрих казок. Випуск 64","desc":"Якщо твій найкрайщий друг раптом зависає у телефоні довше, ніж зазвичай, не поспішай ображатися на нього, що він не йде поганяти з тобою у футбол. Поцікався краще, чим друг насправді такий зайнятий. І"},
+{"id":"8d06yjM0wmo","title":"Неслухняний півник. Олег Погинайко. Візок добрих казок. Випуск 63","desc":"Коли твоє дитинча хоче робити геть усе, окрім того, щоб просто бути собою, як мінімум це викликає занепокоєння. Саме така ситуація виникла у родині квочки та півня, коли їх синочок  зовсім не хотів ку"},
+{"id":"rsSfOIWSUYw","title":"Швидкі змагання. Євген Дмитренко. Візок добрих казок. Випуск 62","desc":"Змагання і насправді виявляться швидкими, якщо у них братимуть участь черепаха, равлик та слимак. І зовсім не тому, що вони вправні бігуни, а тому що перегони досягнуть свого фінішу навіть не розпочав"},
+{"id":"vRbBWu0OF28","title":"Цирк. Наталія Клевцова. Візок добрих казок. Вип. 61","desc":"Кожен долає труднощі по-своєму. Клоун продовжує смішити людей, не дивлячись на те, що у країні війна і що за мить до свого виходу на манеж йому надходить звістка про те, що на війні загинув його ліпши"},
+{"id":"85T2vmDR130","title":"Рік. Візок добрих казок. Випуск 60","desc":"60-й випуск «Візок добрих казок» закликає усіх до новорічного дива. І хоч у Новий рік не завжди збувається, про що мріється і що планується, ми все одно з нетерпінням та надією чекаємо його, адже саме"},
+{"id":"Xp6cRraMtbs","title":"СНІГОВИК. Марина КІРНОСОВА. Візок добрих казок. Випуск 59","desc":"#сніговик #візокдобрихказок #новийрік  Коли, як не взимку, дітлахам хочеться бавитися та ліпити сніговика. Батьки Сашка з розумінням поставилися до цієї ідеї, та всі разом погодилися ліпити сніговика."},
+{"id":"ameCKgbwwes","title":"Марія Мелещук. Дива на Миколая. Візок добрих казок. Випуск 58","desc":"Дива бувають дуже різні, та коли в них не віриш, як хлопчик Дмитрик, то це зовсім не означає, що їх взагалі немає. У новому 58-му випуску «Візок добрих казок» ви дізнаєтеся про дива, які трапляються н"},
+{"id":"zBEJMKSh-zk","title":"Візок добрих казок. Як Андрійко в садок не пішов. Марина Корж. Випуск 57","desc":"Якщо ви не надто замислюєтеся над причинно-наслідковим зв’язком між вашими діями і тим, що потім слідує за ними, то, можливо, настав час це зробити, переглянувши новий 57-й випуск проєкту «Візок добри"},
+{"id":"tGbfO3jYHPg","title":"Як полюбити дощ. Тетяна Безушко-Граб. Візок добрих казок. Випуск 56","desc":"Якщо ви не любите дощ та негоду, історія Тетяни Безушко-Граб у новому 56-му випуску проєкту «Візок добрих казок» повідає вам, як навчитися радіти навіть похмурій погоді та втілювати свої мрії у життя "},
+{"id":"Shbhh9nMeMg","title":"Василь Сухомлинський. Який слід повинна залишити людина на Землі?  Візок добрих казок: 55 випуск","desc":"З нагоди 105 річчя від дня народження видатного педагога та письменника Василя Сухомлинського 55-ий випуск проєкту «Візок добрих казок» пропонує для перегляду казку «Який слід повинна залишити людина "},
+{"id":"2qjibiAv_Es","title":"Тетяна Міщенко. Пригоди веселих ноток. Візок добрих казок. Випуск 54","desc":"Якщо ви хочете побачити світ за межами своєї країни і потрапити у справжні пригоди, а, можливо, як веселі нотки у новому випуску проєкту «Візок добрих казок», створити найкращу музику всіх часів, тоді"},
+{"id":"geTGoyfVxgo","title":"Візок добрих казок. Голівуд. Тетяна Міщенко. Випуск 53","desc":"#візокдобрихказок  #голлівуд   #тетянаміщенко Історія Тетяни Міщенко про те, як можна підкорити увесь світ, при цьому залишитися гарним другом та не викликати в інших почуття заздрості, познайомить ва"},
+{"id":"QgLm8ymslI4","title":"Світле свято Великодня. Візок добрих казок. Випуск 52","desc":"Інколи не знаєш, чому псується настрій і сумно на душі. Ось і в історії про світле свято Великодня Алі Прутської дітки засумували. Мама розповіла їм про значення свята, і діти пожвавішали в очікуванні"},
+{"id":"JAZrgV0rnhI","title":"Хто головніший? Віталія Савченко. візок добрих казок. Вип. 51","desc":"#візокдобрихказок #хтоголовніий #віталіясавченко  Поки ти маленький і багато чого ще не розумієш, потрібно бути обережним із запитаннями до дорослих, адже твоя цікавість може викликати поміж ними свар"}]};
+
+const PROFESSIONS=[
+  {id:"w5xrIcTvtrQ",title:"Перукар",cat:"краса",desc:"Мистецтво створювати неповторний образ."},
+  {id:"4KfkZBadvrw",title:"Археолог",cat:"наука",desc:"Розкопки і відкриття таємниць минулого."},
+  {id:"TpmTprbrYTM",title:"Видавнича справа",cat:"творчість",desc:"Як створюється книжка від А до Я."},
+  {id:"nPnddLt04oU",title:"Програміст",cat:"технології",desc:"Від двоїчного коду до релізу продукту."},
+  {id:"4MZzS--1x0k",title:"Юрист",cat:"право",desc:"Фахівець, що стоїть на варті закону."},
+  {id:"ZAMvSEy7tOE",title:"Пасічник",cat:"природа",desc:"Про бджіл та їхню роль у природі."},
+  {id:"yUMCXfArCvg",title:"Кондитер",cat:"краса",desc:"Солодкий світ кондитерського мистецтва."},
+  {id:"iSBIx3AoYhc",title:"Психолог",cat:"медицина",desc:"Як допомогти людині зрозуміти себе."},
+  {id:"F65U1POdvaI",title:"Пожежник",cat:"захист",desc:"Мужність та допомога у складних ситуаціях."},
+  {id:"ukzrCP7_-48",title:"Стоматолог",cat:"медицина",desc:"Як підтримувати здоров'я посмішки."},
+  {id:"juHsbOMVrvc",title:"Рятувальник",cat:"захист",desc:"Щоденна робота рятувальників."},
+  {id:"wK-SEw3J1D4",title:"Волонтер",cat:"суспільство",desc:"Волонтер — стан душі і поклик серця."},
+  {id:"e8tNJuT8ZUI",title:"Залізничник",cat:"технології",desc:"Роль у транспортній системі країни."},
+  {id:"LFOChJmKJXo",title:"Художник",cat:"творчість",desc:"Творчий шлях та вираження через мистецтво."},
+  {id:"qR9gbNcsSdg",title:"Поліцейський",cat:"право",desc:"Захист закону та порядку кожного дня."},
+  {id:"XZt72XCTy4I",title:"Медична сестра",cat:"медицина",desc:"Догляд, милосердя та охорона здоров'я."},
+  {id:"QN0vSAbC2UE",title:"Пілот",cat:"технології",desc:"Світ авіації від кабіни до злітної."},
+  {id:"p7EMt9x0TZ8",title:"Військовий",cat:"захист",desc:"Дисципліна, честь і захист Батьківщини."},
+  {id:"dtFQHnUf1So",title:"Вчитель",cat:"суспільство",desc:"Формування майбутнього покоління."},
+];
+
+const CAT_META={
+  "краса":{color:"#ec4899",bg:"rgba(236,72,153,.12)",emoji:"💄"},
+  "наука":{color:"#3b82f6",bg:"rgba(59,130,246,.12)",emoji:"🔬"},
+  "творчість":{color:"#a855f7",bg:"rgba(168,85,247,.12)",emoji:"🎨"},
+  "технології":{color:"#14b8a6",bg:"rgba(20,184,166,.12)",emoji:"💻"},
+  "право":{color:"#f59e0b",bg:"rgba(245,158,11,.12)",emoji:"⚖️"},
+  "природа":{color:"#22c55e",bg:"rgba(34,197,94,.12)",emoji:"🌿"},
+  "медицина":{color:"#ef4444",bg:"rgba(239,68,68,.12)",emoji:"🏥"},
+  "захист":{color:"#f97316",bg:"rgba(249,115,22,.12)",emoji:"🛡️"},
+  "суспільство":{color:"#8b5cf6",bg:"rgba(139,92,246,.12)",emoji:"🤝"},
+};
+
+const SLUG_UA={
+  "vinnytska":"Вінницька область","volynska":"Волинська область",
+  "dnipropetrovska":"Дніпропетровська область","zhytomyrska":"Житомирська область",
+  "zakarpatska":"Закарпатська область","zaporizka":"Запорізька область",
+  "ivano-frankivska":"Івано-Франківська область","kyivska":"Київська область",
+  "kyiv":"Київ","kirovohradska":"Кіровоградська область","lvivska":"Львівська область",
+  "mykolaivska":"Миколаївська область","odeska":"Одеська область",
+  "poltavska":"Полтавська область","rivnenska":"Рівненська область",
+  "sumska":"Сумська область","ternopilska":"Тернопільська область",
+  "kharkivska":"Харківська область","khersonska":"Херсонська область",
+  "khmelnytska":"Хмельницька область","cherkaska":"Черкаська область",
+  "chernihivska":"Чернігівська область","chernivetska":"Чернівецька область","luhanska":"Луганська область","donetska":"Донецька область","krym":"Автономна Республіка Крим","sevastopol":"Севастополь",
+};
+
+const TAB_COLORS={
+  hub:{bg:"rgba(251,191,36,.12)",bc:"rgba(251,191,36,.3)",c:"var(--yellow)"},
+  geo:{bg:"rgba(59,130,246,.12)",bc:"rgba(59,130,246,.3)",c:"#60a5fa"},
+  tales:{bg:"rgba(168,85,247,.12)",bc:"rgba(168,85,247,.3)",c:"#c084fc"},
+  prof:{bg:"rgba(249,115,22,.12)",bc:"rgba(249,115,22,.3)",c:"#fb923c"},
+};
+
+function getTab(id){return document.querySelector('.tab[data-sec="'+id+'"]')}
+function goTo(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.style.background=t.style.borderColor=t.style.color='';});
+  document.getElementById('sec-'+id).classList.add('visible');
+  if(btn){btn.classList.add('active');const c=TAB_COLORS[id]||{};btn.style.background=c.bg||'';btn.style.borderColor=c.bc||'';btn.style.color=c.c||'';}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+let activeRegion=null,activeLayer='travel',activeGeoId=null;
+const tooltip=document.getElementById('tooltip');
+
+function setLayer(layer,btn){
+  activeLayer=layer;
+  document.querySelectorAll('.layer-btn').forEach(b=>{b.classList.remove('active');b.style.background=b.style.borderColor=b.style.color='';});
+  btn.classList.add('active');
+  const cols={travel:{bg:'rgba(59,130,246,.12)',bc:'rgba(59,130,246,.3)',c:'#60a5fa'},rivers:{bg:'rgba(14,116,144,.12)',bc:'rgba(34,211,238,.3)',c:'#22d3ee'},both:{bg:'rgba(251,191,36,.1)',bc:'rgba(251,191,36,.3)',c:'var(--yellow)'}};
+  const cl=cols[layer]||{};btn.style.background=cl.bg;btn.style.borderColor=cl.bc;btn.style.color=cl.c;
+  colorizeMap();
+  if(activeRegion)showRegionVideos(activeRegion);
+}
+
+function getRegionVids(name){
+  const t=(TRAVEL[name]||[]).map(v=>({...v,src:'travel'}));
+  const r=(RIVERS[name]||[]).map(v=>({...v,src:'rivers'}));
+  if(activeLayer==='travel')return t;
+  if(activeLayer==='rivers')return r;
+  return[...t,...r];
+}
+
+function colorizeMap(){
+  document.querySelectorAll('#umap path[data-region]').forEach(path=>{
+    path.classList.remove('has-travel','has-rivers','has-both','no-data');
+    const slug=path.getAttribute('data-region')||'';
+    const name=SLUG_UA[slug]||'';
+    const hasT=!!(TRAVEL[name]?.length);
+    const hasR=!!(RIVERS[name]?.length);
+    if(hasT&&hasR)path.classList.add('has-both');
+    else if(hasT)path.classList.add('has-travel');
+    else if(hasR)path.classList.add('has-rivers');
+  });
+  document.querySelectorAll('#umap path:not([data-region])').forEach(p=>p.classList.add('no-data'));
+}
+
+function selectRegion(name,pathEl){
+  document.querySelectorAll('#umap path.active').forEach(p=>p.classList.remove('active'));
+  if(pathEl)pathEl.classList.add('active');
+  activeRegion=name;showRegionVideos(name);
+}
+
+function showRegionVideos(name){
+  const list=getRegionVids(name);
+  document.getElementById('r-ico').textContent='📍';
+  document.getElementById('r-name').textContent=name;
+  document.getElementById('r-cnt').textContent=list.length+' відео';
+  document.getElementById('r-search').style.display=list.length>3?'block':'none';
+  document.getElementById('r-input').value='';
+  renderGeoList(list);
+}
+
+function filterGeo(){
+  if(!activeRegion)return;
+  const q=document.getElementById('r-input').value.toLowerCase();
+  renderGeoList(getRegionVids(activeRegion).filter(v=>v.title.toLowerCase().includes(q)||(v.loc||'').toLowerCase().includes(q)));
+}
+
+function renderGeoList(list){
+  const cont=document.getElementById('v-list');
+  if(!list.length){cont.innerHTML='<div class="hint-panel"><div class="hi">🗺️</div><p>Відео по цьому регіону немає</p></div>';return;}
+  cont.innerHTML=list.map(v=>{
+    const tagColor=v.src==='rivers'?'rgba(14,116,144,.8)':'rgba(29,78,216,.8)';
+    const tagLabel=v.src==='rivers'?'💧':'🗺️';
+    return'<div class="vcard" id="vc-'+v.id+'" onclick="playGeo(\''+v.id+'\',\''+esc(v.title)+'\',\''+esc(v.loc||'')+'\')">'+
+      '<div class="vthumb"><img src="https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg" alt="'+esc(v.title)+'" onerror="this.src=\'https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg\'">'+
+      '<div class="vthumb-play">▶</div><span class="vcard-tag" style="background:'+tagColor+';color:#fff">'+tagLabel+'</span></div>'+
+      '<div class="vinfo"><div class="vtitle">'+esc(v.title)+'</div><div class="vloc">📍 '+esc((v.loc||'').split(',')[0])+'</div></div></div>';
+  }).join('');
+}
+
+function playGeo(id,title,loc){
+  activeGeoId=id;
+  document.querySelectorAll('.vcard').forEach(c=>c.classList.remove('playing'));
+  document.getElementById('vc-'+id)?.classList.add('playing');
+  document.getElementById('p-title').textContent=title;
+  document.getElementById('p-loc').textContent=loc;
+  document.getElementById('p-yt').href='https://youtu.be/'+id;
+  document.getElementById('p-frame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';
+  const ps=document.getElementById('geo-player');ps.classList.add('on');
+  ps.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function closeGeoPlayer(){
+  document.getElementById('p-frame').src='';
+  document.getElementById('geo-player').classList.remove('on');
+  document.querySelectorAll('.vcard').forEach(c=>c.classList.remove('playing'));
+  activeGeoId=null;
+}
+
+function buildChips(){
+  const all=new Set([...Object.keys(TRAVEL),...Object.keys(RIVERS)]);
+  const wrap=document.getElementById('chips');
+  [...all].sort((a,b)=>{const ta=(TRAVEL[a]||[]).length+(RIVERS[a]||[]).length;const tb=(TRAVEL[b]||[]).length+(RIVERS[b]||[]).length;return tb-ta;}).forEach(name=>{
+    const cnt=(TRAVEL[name]||[]).length+(RIVERS[name]||[]).length;
+    const btn=document.createElement('button');btn.className='chip';
+    btn.innerHTML=name+' <span class="cc">'+cnt+'</span>';
+    btn.onclick=()=>{const slug=Object.entries(SLUG_UA).find(([s,n])=>n===name)?.[0];const path=slug?document.querySelector('[data-region="'+slug+'"]'):null;selectRegion(name,path);document.querySelector('.map-panel').scrollIntoView({behavior:'smooth'});};
+    wrap.appendChild(btn);
+  });
+}
+
+let activeTale='bedtime';
+function setTaleTab(tab,btn){
+  activeTale=tab;
+  document.querySelectorAll('.tale-tab').forEach(b=>{b.classList.remove('active');b.style.background=b.style.borderColor=b.style.color='';});
+  btn.classList.add('active');btn.style.background='rgba(168,85,247,.12)';btn.style.borderColor='rgba(168,85,247,.3)';btn.style.color='#c084fc';
+  document.getElementById('tale-search').value='';filterTales();
+}
+function filterTales(){
+  const q=(document.getElementById('tale-search').value||'').toLowerCase();
+  const list=(TALES[activeTale]||[]).filter(v=>!q||v.title.toLowerCase().includes(q));
+  renderTales(list);
+}
+function renderTales(list){
+  const grid=document.getElementById('tales-grid');const empty=document.getElementById('tales-empty');
+  const tabLabel=activeTale==='bedtime'?'🌙 Казка на ніч':'🛒 Візок добрих казок';
+  const plId=activeTale==='bedtime'?'PLfN5ddjLy4TvE-2CQYt3OKl4i2FNmm3lG':'PLfN5ddjLy4TuU2NxfdzDaiAoe629tm0Q9';
+  if(!(TALES[activeTale]||[]).length){
+    grid.innerHTML='<div class="coming-soon" style="grid-column:1/-1"><div class="cs-icon">🧚</div><h3>'+tabLabel+'</h3><p>Запустіть <strong>nbukids_collector.py</strong> щоб отримати відео з плейлиста,<br>потім вставте їх в масив TALES.</p><a class="pl-link" href="https://youtube.com/playlist?list='+plId+'" target="_blank">▶ Переглянути на YouTube</a></div>';
+    empty.style.display='none';return;
+  }
+  if(!list.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=list.map((v,i)=>'<div class="tcard" style="animation-delay:'+i*.04+'s" onclick="openModal(\''+v.id+'\',\''+esc(v.title)+'\',\''+esc(v.desc||'')+'\',\''+esc(tabLabel)+'\')">'+
+    '<div class="tcard-thumb"><img src="https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg" alt="'+esc(v.title)+'" onerror="this.src=\'https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg\'">'+
+    '<div class="tcard-ov"><div class="tcard-play">▶</div></div>'+
+    '<span class="tcard-badge" style="background:rgba(168,85,247,.8);color:#fff">'+tabLabel+'</span></div>'+
+    '<div class="tcard-body"><div class="tcard-title">'+esc(v.title)+'</div></div></div>').join('');
+}
+
+let activeCat='all';
+function buildCats(){
+  const row=document.getElementById('cat-row');
+  row.innerHTML=['all',...Object.keys(CAT_META)].map(cat=>{
+    const m=CAT_META[cat];
+    return'<button class="ccat'+(cat==='all'?' active':'')+'" onclick="setCat(\''+cat+'\',this)">'+(cat==='all'?'▶ Всі':m.emoji+' '+cat)+'</button>';
+  }).join('');
+}
+function setCat(cat,btn){
+  activeCat=cat;document.querySelectorAll('.ccat').forEach(b=>{b.classList.remove('active');b.style.background=b.style.color=b.style.borderColor='';});
+  btn.classList.add('active');const m=CAT_META[cat];
+  if(m){btn.style.background=m.bg;btn.style.color=m.color;btn.style.borderColor=m.color+'55';}
+  else{btn.style.background='rgba(255,255,255,.08)';btn.style.color='var(--text)';}
+  filterProf();
+}
+function filterProf(){
+  const q=(document.getElementById('prof-search').value||'').toLowerCase();
+  let list=PROFESSIONS;
+  if(activeCat!=='all')list=list.filter(v=>v.cat===activeCat);
+  if(q)list=list.filter(v=>v.title.toLowerCase().includes(q)||v.desc.toLowerCase().includes(q));
+  renderProf(list);
+}
+function renderProf(list){
+  const grid=document.getElementById('prof-grid');const empty=document.getElementById('prof-empty');
+  if(!list.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=list.map((v,i)=>{const m=CAT_META[v.cat]||{color:'#94a3b8',bg:'rgba(148,163,184,.12)',emoji:'📋'};
+    return'<div class="pcard" style="animation-delay:'+i*.04+'s" onclick="openModal(\''+v.id+'\',\''+esc(v.title)+'\',\''+esc(v.desc)+'\',\''+esc(m.emoji+' '+v.cat)+'\')">'+
+      '<div class="pcard-thumb"><img src="https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg" alt="'+esc(v.title)+'" onerror="this.src=\'https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg\'">'+
+      '<div class="pcard-ov"><div class="pcard-play">▶</div></div>'+
+      '<span class="pcard-cat" style="background:'+m.bg+';color:'+m.color+'">'+m.emoji+' '+v.cat+'</span></div>'+
+      '<div class="pcard-body"><div class="pcard-title">'+esc(v.title)+'</div><div class="pcard-desc">'+esc(v.desc)+'</div></div></div>';
+  }).join('');
+}
+
+function openModal(id,title,desc,badge){
+  document.getElementById('m-frame').src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';
+  document.getElementById('m-title').textContent=title;document.getElementById('m-desc').textContent=desc;
+  document.getElementById('m-badge').textContent=badge||'';document.getElementById('m-yt').href='https://youtu.be/'+id;
+  document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('m-frame').src='';document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+
+async function loadMap(){
+  try{
+    const r=await fetch('_ukraine_map.html');const text=await r.text();
+    const match=text.match(/<svg[\s\S]*?<\/svg>/i);
+    if(match){
+      document.getElementById('map-wrap').innerHTML=match[0].replace(/<defs>[\s\S]*?<\/defs>/,'').replace('<svg','<svg id="umap"');
+      initMapEvents();
+    }
+  }catch(e){console.log('Map file not found — place _ukraine_map.html in same folder');}
+}
+
+function initMapEvents(){
+  const umap=document.getElementById('umap');if(!umap)return;
+  umap.addEventListener('click',e=>{
+    const path=e.target.closest('path');if(!path)return;
+    const slug=path.getAttribute('data-region')||'';const name=SLUG_UA[slug]||'';
+    const list=getRegionVids(name);if(!name||!list.length)return;
+    selectRegion(name,path);
+  });
+  umap.addEventListener('mousemove',e=>{
+    const path=e.target.closest('path');if(!path){tooltip.style.opacity='0';return;}
+    const slug=path.getAttribute('data-region')||'';const name=SLUG_UA[slug]||path.querySelector('title')?.textContent||'';
+    if(!name){tooltip.style.opacity='0';return;}
+    const t=(TRAVEL[name]||[]).length;const r=(RIVERS[name]||[]).length;
+    const parts=[];if(t)parts.push('🗺️ '+t);if(r)parts.push('💧 '+r);
+    tooltip.textContent=name+(parts.length?' ('+parts.join(', ')+' відео)':' — відео немає');
+    tooltip.style.left=(e.clientX+14)+'px';tooltip.style.top=(e.clientY-8)+'px';tooltip.style.opacity='1';
+  });
+  umap.addEventListener('mouseleave',()=>{tooltip.style.opacity='0';});
+  colorizeMap();
+}
+
+function esc(s){return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/\n/g,' ');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeGeoPlayer();}});
+
+buildCats();filterProf();filterTales();buildChips();loadMap();
+</script>
+</body>
+</html>
