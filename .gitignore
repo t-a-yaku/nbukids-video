@@ -1,0 +1,15 @@
+# Старі одноразові скрипти та їхні результати
+fetch_and_inject.py
+fix_map.py
+inject.py
+inject_rivers.py
+nbukids_collector.py
+nbukids_data/
+_ukraine_map_backup.html
+
+# Службове
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
