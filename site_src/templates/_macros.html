@@ -1,6 +1,6 @@
 {% macro card(v, root, show_series=True) %}
 <a class="card" href="{{ root }}{{ v.url }}" data-title="{{ v.title|lower }}">
-  <span class="thumb"><img src="{{ v.thumb }}" alt="" width="320" height="180" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></span>
+  <span class="thumb"><img src="{{ root ~ v.thumb if v.thumb_local else v.thumb }}" alt="" width="320" height="180" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></span>
   <span class="card-body">
     <span class="card-title">{{ v.title }}</span>
     <span class="card-meta">{% if show_series %}{{ v.series.title }}{% if v.date_h %} · {% endif %}{% endif %}{{ v.date_h }}</span>

@@ -88,6 +88,7 @@ main { padding-top: 8px; padding-bottom: 40px; min-height: 50vh; }
 .block-head h2 { font-size: 21px; margin: 0 0 8px; font-weight: 800; }
 .block-head h2 a { color: var(--ink); text-decoration: none; }
 .block-head h2 a:hover { color: var(--red2); }
+.block-head .count { font-size: 14px; color: var(--muted); font-weight: 600; }
 .more { font-weight: 700; text-decoration: none; white-space: nowrap; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
 .card { display: flex; flex-direction: column; background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); text-decoration: none; color: var(--ink); transition: transform .15s, box-shadow .15s; }
@@ -141,7 +142,8 @@ main { padding-top: 8px; padding-bottom: 40px; min-height: 50vh; }
 .mini-map path { fill: var(--red2); stroke: #fff; stroke-width: 1.2; }
 
 .pres { margin: 0 0 22px; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; max-width: 900px; }
-.pres figcaption { padding: 10px 14px; font-weight: 700; }
+.pres figcaption { padding: 10px 14px; font-weight: 700; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; }
+.pres figcaption a { font-weight: 600; font-size: 14px; }
 .ratio { position: relative; aspect-ratio: 16 / 9; background: #eee; }
 .ratio iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .pres-list { columns: 2 260px; padding-left: 20px; font-family: var(--serif); }

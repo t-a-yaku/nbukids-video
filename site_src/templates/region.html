@@ -17,12 +17,13 @@
   </div>
 </section>
 
-{% if reg.videos %}
+{% for group in reg.videos|groupby(attribute="section_obj.order") %}
+{% set s = group.list[0].section_obj %}
 <section class="block">
-  <div class="block-head"><h2>Відео</h2></div>
-  {{ m.grid(reg.videos, root) }}
+  <div class="block-head"><h2><span aria-hidden="true">{{ s.icon }}</span> {{ s.name }} <small class="count">{{ group.list|length }}</small></h2></div>
+  {{ m.grid(group.list, root) }}
 </section>
-{% endif %}
+{% endfor %}
 
 {% if not reg.count and suggest %}
 <section class="block">
@@ -39,8 +40,8 @@
   <div class="block-head"><h2>Презентації</h2></div>
   {% for p in reg.presentations %}
   <figure class="pres">
-    <div class="ratio"><iframe src="{{ p.preview }}" title="{{ p.title }}" loading="lazy" allowfullscreen></iframe></div>
-    <figcaption>{{ p.title }}</figcaption>
+    <div class="ratio"><iframe src="{{ p.embed }}" title="{{ p.title }}" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+    <figcaption>{{ p.title }} <a href="{{ p.open }}" rel="noopener">Відкрити на весь екран ↗</a></figcaption>
   </figure>
   {% endfor %}
 </section>

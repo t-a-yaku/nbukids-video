@@ -6,9 +6,9 @@
     {% if v.embed %}
     <iframe src="{{ v.embed }}" title="{{ v.title }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     {% elif v.mp4 %}
-    <video controls preload="metadata" poster="{{ v.thumb }}" src="{{ v.mp4 }}"></video>
+    <video controls preload="metadata" {% if not v.thumb_local %}poster="{{ v.thumb }}"{% endif %} src="{{ v.mp4 }}"></video>
     {% else %}
-    <a class="player-out" href="{{ v.watch_url }}"><img src="{{ v.thumb_big }}" alt="">Дивитися відео</a>
+    <a class="player-out" href="{{ v.watch_url }}">{% if v.thumb_big %}<img src="{{ v.thumb_big }}" alt="">{% endif %}Дивитися відео в Медіатеці</a>
     {% endif %}
   </div>
 

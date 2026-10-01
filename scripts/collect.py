@@ -375,7 +375,7 @@ def build(registry: dict, yt_key: str, previous: dict, http=requests) -> dict:
         fid = col(r, "Ідентифікатор")
         if fid and yes(col(r, "Показувати") or "так"):
             presentations.append({"title": col(r, "Назва"), "file_id": fid, "region": col(r, "Область") or None,
-                                  "preview": f"https://docs.google.com/presentation/d/{fid}/preview"})
+                                  "preview": f"https://drive.google.com/file/d/{fid}/preview"})
 
     unknown = sorted({v["region"] for v in videos if v.get("region") and v["region"] not in OBLASTS})
     if unknown:

@@ -189,7 +189,7 @@ def prepare(data: dict) -> dict:
             if key.lower() in lower_ids:   # на серверах Windows регістр літер в адресі не розрізняється
                 key = key + "-2"
             lower_ids[key.lower()] = key
-            v = videos[key] = {**raw, "key": key, "url": f"video/{key}/", "section_obj": sec,
+            v = videos[key] = {**raw, "key": key, "url": f"video/{key}/", "source_url": raw.get("url"), "section_obj": sec,
                                "series_list": [], "date_h": human_date(raw.get("published", ""))}
             sec["videos"].append(v)
             reg = regions.get(raw.get("region") or "")
@@ -204,18 +204,24 @@ def prepare(data: dict) -> dict:
         v["series"] = v["series_list"][0]
         if v.get("platform") == "mediateka":
             v["embed"] = None
-            v["watch_url"] = v.get("url")
+            v["watch_url"] = v.get("source_url")
         else:
             v["embed"] = f"https://www.youtube-nocookie.com/embed/{v['id']}?rel=0"
             v["watch_url"] = f"https://www.youtube.com/watch?v={v['id']}"
             v["thumb_big"] = f"https://i.ytimg.com/vi/{v['id']}/hqdefault.jpg"
-        v.setdefault("thumb_big", v.get("thumb"))
+        if not v.get("thumb"):
+            v["thumb"] = "assets/no-thumb.svg"     # відносно кореня сайту; див. шаблон картки
+            v["thumb_local"] = True
+        v.setdefault("thumb_big", None if v.get("thumb_local") else v.get("thumb"))
         v["desc_short"] = short_text(v.get("description", ""))
 
     geo_section = None
     for p in data.get("presentations", []):
         reg = regions.get(p.get("region") or "")
-        p = {**p, "region_obj": reg}
+        # Файли .pptx з Диска показуються лише через переглядач Диска (до ~100 МБ)
+        p = {**p, "region_obj": reg,
+             "embed": f"https://drive.google.com/file/d/{p['file_id']}/preview",
+             "open": f"https://drive.google.com/file/d/{p['file_id']}/view"}
         if reg:
             reg["presentations"].append(p)
         for s in data.get("sources", []):
@@ -425,7 +431,7 @@ class Site:
 
     def write_search_index(self, videos):
         secs = list(self.m["sections"].keys())
-        items = [{"t": v["title"], "u": v["url"], "th": v.get("thumb", ""), "d": v.get("published", ""),
+        items = [{"t": v["title"], "u": v["url"], "th": ("" if v.get("thumb_local") else v.get("thumb", "")), "d": v.get("published", ""),
                   "s": secs.index(v["section"]), "p": " · ".join(s["title"] for s in v["series_list"]),
                   "r": v["region_obj"]["name"] if v.get("region_obj") else "",
                   "x": short_text(v.get("description", ""), 200)}

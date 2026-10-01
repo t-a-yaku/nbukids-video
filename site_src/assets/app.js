@@ -132,7 +132,7 @@
     results.innerHTML = shown.map(function (f) {
       var it = f.it;
       return '<a class="card" href="' + root + esc(it.u) + '">' +
-        '<span class="thumb"><img src="' + esc(it.th) + '" alt="" width="320" height="180" loading="lazy"><span class="play" aria-hidden="true"></span></span>' +
+        '<span class="thumb"><img src="' + (it.th ? esc(it.th) : root + "assets/no-thumb.svg") + '" alt="" width="320" height="180" loading="lazy"><span class="play" aria-hidden="true"></span></span>' +
         '<span class="card-body"><span class="card-title">' + esc(it.t) + "</span>" +
         '<span class="card-meta">' + esc(it.p) + (it.d ? " · " + hdate(it.d) : "") + "</span>" +
         (it.r ? '<span class="chip">📍 ' + esc(it.r.replace(" область", "")) + "</span>" : "") +
