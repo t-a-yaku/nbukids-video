@@ -1,0 +1,186 @@
+{
+ "generated_at": "2026-10-01T12:07:43+00:00",
+ "sections": [
+  {
+   "name": "Географія України",
+   "icon": "🗺️",
+   "color": "#3B82F6",
+   "order": 1.0,
+   "description": "Інтерактивна карта: міста, річки, презентації про області"
+  },
+  {
+   "name": "Казки",
+   "icon": "🧚",
+   "color": "#A855F7",
+   "order": 2.0,
+   "description": "Казки на ніч і казкові читання"
+  },
+  {
+   "name": "Світ професій",
+   "icon": "💼",
+   "color": "#F97316",
+   "order": 3.0,
+   "description": "Профорієнтаційні відео"
+  }
+ ],
+ "sources": [
+  {
+   "id": "PLfN5ddjLy4TulL6Gw2newCakGxCMCiUN4",
+   "title": "Мандруємо Україною. WOW факти",
+   "section": "Географія України",
+   "type": "YouTube-плейлист",
+   "map": "вручну (вкладка «прив'язки»)",
+   "ok": false,
+   "error": "немає ключа YOUTUBE_API_KEY",
+   "count": 0
+  },
+  {
+   "id": "PLfN5ddjLy4TteE9gGsNft8gD0T7IGvNEk",
+   "title": "Водні артерії України",
+   "section": "Географія України",
+   "type": "YouTube-плейлист",
+   "map": "вручну (вкладка «прив'язки»)",
+   "ok": false,
+   "error": "немає ключа YOUTUBE_API_KEY",
+   "count": 0
+  },
+  {
+   "id": "15mGzPwOvK_xR39mRN30GZnijW36lkczC",
+   "title": "Подорож містами України (презентації)",
+   "section": "Географія України",
+   "type": "Google Drive: папка",
+   "map": "вручну (вкладка «презентації»)",
+   "ok": true
+  },
+  {
+   "id": "PLfN5ddjLy4TvE-2CQYt3OKl4i2FNmm3lG",
+   "title": "Казка на ніч",
+   "section": "Казки",
+   "type": "YouTube-плейлист",
+   "map": "ні",
+   "ok": false,
+   "error": "немає ключа YOUTUBE_API_KEY",
+   "count": 0
+  },
+  {
+   "id": "PLfN5ddjLy4TuU2NxfdzDaiAoe629tm0Q9",
+   "title": "Візок добрих казок",
+   "section": "Казки",
+   "type": "YouTube-плейлист",
+   "map": "ні",
+   "ok": false,
+   "error": "немає ключа YOUTUBE_API_KEY",
+   "count": 0
+  },
+  {
+   "id": "PLfN5ddjLy4TvYMp3HUHx2RVtXWC4qgcai",
+   "title": "Світ професій",
+   "section": "Світ професій",
+   "type": "YouTube-плейлист",
+   "map": "ні",
+   "ok": false,
+   "error": "немає ключа YOUTUBE_API_KEY",
+   "count": 0
+  }
+ ],
+ "videos": [],
+ "presentations": [
+  {
+   "title": "Найцікавіші міста Черкащини",
+   "file_id": "14lSZEgV3kIyW0VMhRAm4iVEwow1akY84",
+   "region": "Черкаська область",
+   "preview": "https://docs.google.com/presentation/d/14lSZEgV3kIyW0VMhRAm4iVEwow1akY84/preview"
+  },
+  {
+   "title": "Найцікавіші міста Хмельниччини",
+   "file_id": "15nSMlbN4JNDqwSKtuGTpFFwMPtxif2pE",
+   "region": "Хмельницька область",
+   "preview": "https://docs.google.com/presentation/d/15nSMlbN4JNDqwSKtuGTpFFwMPtxif2pE/preview"
+  },
+  {
+   "title": "Найцікавіші міста Кіровоградщини",
+   "file_id": "16SCSvbAGMxxXrXqAISqNTWXrazMOLhBM",
+   "region": "Кіровоградська область",
+   "preview": "https://docs.google.com/presentation/d/16SCSvbAGMxxXrXqAISqNTWXrazMOLhBM/preview"
+  },
+  {
+   "title": "Найцікавіші міста Вінниччини",
+   "file_id": "1C0996cCjcv5wpXLDlSnqUSjyAjc23IsH",
+   "region": "Вінницька область",
+   "preview": "https://docs.google.com/presentation/d/1C0996cCjcv5wpXLDlSnqUSjyAjc23IsH/preview"
+  },
+  {
+   "title": "Найцікавіші міста Рівненщини",
+   "file_id": "1CHjaUtdK7GFu0tX42AYfnoUzI-mWYkbd",
+   "region": "Рівненська область",
+   "preview": "https://docs.google.com/presentation/d/1CHjaUtdK7GFu0tX42AYfnoUzI-mWYkbd/preview"
+  },
+  {
+   "title": "Найцікавіші міста Івано-Франківщини",
+   "file_id": "1DjJbPzF2gVfkP_yZ7ywq9WRwowp5HkX2",
+   "region": "Івано-Франківська область",
+   "preview": "https://docs.google.com/presentation/d/1DjJbPzF2gVfkP_yZ7ywq9WRwowp5HkX2/preview"
+  },
+  {
+   "title": "Найцікавіші міста Чернігівщини",
+   "file_id": "1E3fXwAiDy7Q7S4kRzkUCOROzOeHWMiVC",
+   "region": "Чернігівська область",
+   "preview": "https://docs.google.com/presentation/d/1E3fXwAiDy7Q7S4kRzkUCOROzOeHWMiVC/preview"
+  },
+  {
+   "title": "Найцікавіші міста Буковини",
+   "file_id": "1MHmaElWJD5oTt4u3XZLDTNaZhypg9MP-",
+   "region": "Чернівецька область",
+   "preview": "https://docs.google.com/presentation/d/1MHmaElWJD5oTt4u3XZLDTNaZhypg9MP-/preview"
+  },
+  {
+   "title": "Найцікавіші міста Тернопільщини",
+   "file_id": "1PwJMbCTt3IAjN4TEKYymYNBYwrtLbD4F",
+   "region": "Тернопільська область",
+   "preview": "https://docs.google.com/presentation/d/1PwJMbCTt3IAjN4TEKYymYNBYwrtLbD4F/preview"
+  },
+  {
+   "title": "Найцікавіші міста Полтавщини",
+   "file_id": "1Rx7tTOTQwKf6vXuPL2xsXKydhlOZJxmj",
+   "region": "Полтавська область",
+   "preview": "https://docs.google.com/presentation/d/1Rx7tTOTQwKf6vXuPL2xsXKydhlOZJxmj/preview"
+  },
+  {
+   "title": "Найкращі міста Волині",
+   "file_id": "1ZuDH8GUe9HmBdaDu34jI-edq3AUeN74j",
+   "region": "Волинська область",
+   "preview": "https://docs.google.com/presentation/d/1ZuDH8GUe9HmBdaDu34jI-edq3AUeN74j/preview"
+  },
+  {
+   "title": "Найцікавіші міста Закарпаття",
+   "file_id": "1mSqssQxiD-Hx0mgw6ByfpGQH1XgYoRQ0",
+   "region": "Закарпатська область",
+   "preview": "https://docs.google.com/presentation/d/1mSqssQxiD-Hx0mgw6ByfpGQH1XgYoRQ0/preview"
+  },
+  {
+   "title": "Найцікавіші міста Миколаївщини",
+   "file_id": "1vErTum9Cg_LXBfiaKCEoQBO4c5o7EIvx",
+   "region": "Миколаївська область",
+   "preview": "https://docs.google.com/presentation/d/1vErTum9Cg_LXBfiaKCEoQBO4c5o7EIvx/preview"
+  },
+  {
+   "title": "Найцікавіші міста Львівщини",
+   "file_id": "1xFKNu__lM3LUi5CQDXGDGc58OjE6qfC-",
+   "region": "Львівська область",
+   "preview": "https://docs.google.com/presentation/d/1xFKNu__lM3LUi5CQDXGDGc58OjE6qfC-/preview"
+  },
+  {
+   "title": "Найцікавіші міста Харківщини",
+   "file_id": "1z54E3C6z_RTdcz3BS5JlfOdRjTtII-ap",
+   "region": "Харківська область",
+   "preview": "https://docs.google.com/presentation/d/1z54E3C6z_RTdcz3BS5JlfOdRjTtII-ap/preview"
+  }
+ ],
+ "errors": [
+  "«Мандруємо Україною. WOW факти»: немає ключа YOUTUBE_API_KEY",
+  "«Водні артерії України»: немає ключа YOUTUBE_API_KEY",
+  "«Казка на ніч»: немає ключа YOUTUBE_API_KEY",
+  "«Візок добрих казок»: немає ключа YOUTUBE_API_KEY",
+  "«Світ професій»: немає ключа YOUTUBE_API_KEY"
+ ]
+}
