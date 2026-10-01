@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="page-head">
+  <h1>Пошук у відеотеці</h1>
+</section>
+<form class="search search-big" action="" method="get" role="search" data-search-page data-index="{{ root }}search.json" data-root="{{ root }}">
+  <label class="vh" for="q-page">Що шукаємо?</label>
+  <input id="q-page" type="search" name="q" placeholder="Наприклад: Луцьк, піжама, лікар" autocomplete="off" autofocus>
+  <button type="submit" aria-label="Шукати"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+</form>
+<div class="pills" data-sec-filter hidden></div>
+<p class="search-status" aria-live="polite" data-status></p>
+<div class="grid" data-results></div>
+<noscript><p>Для пошуку потрібно увімкнути JavaScript. Усі відео також доступні в розділах угорі сторінки.</p></noscript>
+{% endblock %}

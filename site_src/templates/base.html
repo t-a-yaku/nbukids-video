@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+{% if description %}<meta name="description" content="{{ description }}">{% endif %}
+<meta name="author" content="{{ library }}">
+<meta name="robots" content="{{ 'index, follow, max-image-preview:large, max-video-preview:-1' if (indexable and robots_index) else 'noindex, follow' }}">
+<link rel="canonical" href="{{ canonical }}">
+<meta property="og:site_name" content="{{ site_name }}">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:type" content="{{ og_type or 'website' }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:title" content="{{ title }}">
+{% if description %}<meta property="og:description" content="{{ description }}">{% endif %}
+<meta property="og:image" content="{{ og_image or (site_url ~ 'assets/og.png') }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#8b1a1a">
+<link rel="icon" href="{{ root }}assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ root }}assets/style.css">
+{% for item in ld %}
+<script type="application/ld+json">{{ item|tojson_ld }}</script>
+{% endfor %}
+</head>
+<body>
+<a class="skip" href="#main">Перейти до змісту</a>
+{% if not indexable %}
+<div class="demo">Демонстраційна версія. Адреса сайту тимчасова.</div>
+{% endif %}
+<div class="sitebar">
+  <div class="wrap sitebar-in">
+    <a class="sitebar-home" href="{{ library_url }}">{{ library }}</a>
+    <nav class="sitebar-nav" aria-label="Сайт бібліотеки">
+      <a href="https://chl.kiev.ua/Default.aspx?id=5497">Музей книги</a>
+      <a href="https://chl.kiev.ua/Default.aspx?id=6402">Електронна бібліотека</a>
+      <a href="https://chl.kiev.ua/Catalog.aspx">е-Каталог</a>
+    </nav>
+  </div>
+</div>
+<header class="vhead">
+  <div class="wrap vhead-in">
+    <a class="logo" href="{{ root }}">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span class="logo-text"><b>Відеотека</b><small>для дітей і батьків</small></span>
+    </a>
+    <form class="search" action="{{ root }}poshuk/" method="get" role="search">
+      <label class="vh" for="q-top">Пошук відео</label>
+      <input id="q-top" type="search" name="q" placeholder="Знайти казку, місто, професію…" autocomplete="off">
+      <button type="submit" aria-label="Шукати"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+    </form>
+  </div>
+  <nav class="wrap tabs" aria-label="Розділи відеотеки">
+    {% for s in sections %}
+    <a href="{{ root }}{{ s.url }}" style="--c: {{ s.color or '#990000' }}"{% if active is sameas s %} aria-current="page"{% endif %}><span aria-hidden="true">{{ s.icon }}</span> {{ s.name }} <em>{{ s.videos|length }}</em></a>
+    {% endfor %}
+  </nav>
+</header>
+{% if crumbs %}
+<nav class="wrap crumbs" aria-label="Ви тут">
+  {% for c in crumbs %}
+    {% if not loop.last %}<a href="{{ c.url if c.url.startswith('http') else root ~ c.url }}">{{ c.title }}</a><span aria-hidden="true">›</span>{% else %}<span aria-current="page">{{ c.title }}</span>{% endif %}
+  {% endfor %}
+</nav>
+{% endif %}
+<main id="main" class="wrap">
+{% block main %}{% endblock %}
+</main>
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <b>{{ library }}</b><br>
+      Відео бібліотеки з YouTube-каналу <a href="{{ channel_url }}">@nbukids</a> та Медіатеки.<br>
+      Оновлюється щоночі{% if updated_h %}, востаннє {{ updated_h }}{% endif %}.
+    </div>
+    <nav aria-label="Службові сторінки">
+      <a href="{{ root }}pro/">Про відеотеку</a>
+      <a href="{{ root }}poshuk/">Пошук</a>
+      <a href="{{ library_url }}">chl.kiev.ua</a>
+    </nav>
+  </div>
+</footer>
+<script src="{{ root }}assets/app.js" defer></script>
+</body>
+</html>

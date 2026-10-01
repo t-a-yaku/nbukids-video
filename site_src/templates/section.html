@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m with context %}
+{% block main %}
+<section class="page-head" style="--c: {{ sec.color or '#990000' }}">
+  <h1><span aria-hidden="true">{{ sec.icon }}</span> {{ sec.name }}</h1>
+  {% if sec.description %}<p class="lead">{{ sec.description }}.</p>{% endif %}
+  <p class="stat">{{ sec.videos|length }} відео{% if series|length > 1 %} у {{ series|length }} серіях{% endif %}{% if sec.presentations %} · {{ sec.presentations|length }} презентацій{% endif %}</p>
+</section>
+
+{% if map %}{{ m.ukraine_map(map, root) }}{% endif %}
+
+{% if single %}
+  {{ m.filter_box(sec.videos|length) }}
+  {{ m.grid(sec.videos, root, show_series=False) }}
+{% else %}
+  {% for se in series %}
+  <section class="block">
+    <div class="block-head">
+      <h2><a href="{{ root }}{{ se.url }}">{{ se.title }}</a></h2>
+      <a class="more" href="{{ root }}{{ se.url }}">Усі {{ se.videos|length }} →</a>
+    </div>
+    {{ m.grid(se.videos[:8], root, show_series=False) }}
+  </section>
+  {% endfor %}
+{% endif %}
+
+{% if sec.presentations %}
+<section class="block">
+  <div class="block-head"><h2>Презентації про області</h2></div>
+  <ul class="pres-list">
+    {% for p in sec.presentations %}
+    <li>{% if p.region_obj %}<a href="{{ root }}{{ p.region_obj.url }}#prezentatsii">{{ p.title }}</a>{% else %}{{ p.title }}{% endif %}</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

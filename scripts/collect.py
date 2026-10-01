@@ -153,7 +153,7 @@ def col(row: dict, *prefixes: str) -> str:
 # ───────────────────────── YouTube ─────────────────────────
 
 def fetch_youtube_playlist(playlist_id: str, key: str, http=requests) -> list[dict]:
-    videos, token = [], None
+    videos, token, seen = [], None, set()
     while True:
         params = {"part": "snippet,contentDetails", "playlistId": playlist_id, "maxResults": 50, "key": key}
         if token:
@@ -168,13 +168,16 @@ def fetch_youtube_playlist(playlist_id: str, key: str, http=requests) -> list[di
             title = sn.get("title", "")
             if not vid or title in ("Private video", "Deleted video") or not sn.get("thumbnails"):
                 continue  # приватні та видалені відео не показуємо
+            if vid in seen:
+                continue  # те саме відео двічі в одному плейлисті
+            seen.add(vid)
             th = sn["thumbnails"]
             thumb = (th.get("medium") or th.get("high") or th.get("default") or {}).get("url", "")
             videos.append({
                 "platform": "youtube",
                 "id": vid,
                 "title": title,
-                "description": (sn.get("description") or "")[:300],
+                "description": (sn.get("description") or "")[:1000],
                 "thumb": thumb or f"https://i.ytimg.com/vi/{vid}/mqdefault.jpg",
                 "published": (it.get("contentDetails", {}).get("videoPublishedAt") or sn.get("publishedAt") or "")[:10],
                 "url": f"https://youtu.be/{vid}",

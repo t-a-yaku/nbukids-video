@@ -52,7 +52,7 @@ class FakeHTTP:
                 return Resp(403, "quotaExceeded")
             if pl == "PL_WOW" and not tok:
                 return Resp(js={"items": [yt_item("AAA", "Ужгород — перлина Закарпаття"),
-                                          yt_item("PRIV", "Private video"),
+                                          yt_item("PRIV", "Private video"), yt_item("AAA", "Ужгород — перлина Закарпаття"),
                                           yt_item("HID", "Сховане відео")], "nextPageToken": "p2"})
             if pl == "PL_WOW" and tok == "p2":
                 return Resp(js={"items": [yt_item("BBB", "Замки Рівненщини")]})
@@ -111,6 +111,7 @@ checks = {
     "розділи: лише увімкнені, за порядком": [s["name"] for s in data["sections"]] == ["Географія України", "Казки", "Марафони читання"],
     "YouTube: обидві сторінки плейлиста": {"AAA", "BBB"} <= by_id.keys(),
     "YouTube: приватні відео відкинуто": "PRIV" not in by_id,
+    "YouTube: повтор у плейлисті відкинуто": sum(1 for v in data["videos"] if v["id"] == "AAA") == 1,
     "Прив'язки: приховане відео відкинуто": "HID" not in by_id,
     "Прив'язки: область вручну": by_id["AAA"]["region"] == "Закарпатська область",
     "Прив'язки: нова назва": by_id["BBB"]["title"] == "Замки Рівненщини (оновлено)",

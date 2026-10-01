@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m with context %}
+{% block main %}
+<article class="watch">
+  <div class="player">
+    {% if v.embed %}
+    <iframe src="{{ v.embed }}" title="{{ v.title }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    {% elif v.mp4 %}
+    <video controls preload="metadata" poster="{{ v.thumb }}" src="{{ v.mp4 }}"></video>
+    {% else %}
+    <a class="player-out" href="{{ v.watch_url }}"><img src="{{ v.thumb_big }}" alt="">Дивитися відео</a>
+    {% endif %}
+  </div>
+
+  <div class="watch-info">
+    <h1>{{ v.title }}</h1>
+    <p class="watch-meta">
+      {% for s in v.series_list %}<a class="tag" href="{{ root }}{{ s.url if s.section.series|length > 1 else s.section.url }}" style="--c: {{ v.section_obj.color or '#990000' }}">{{ v.section_obj.icon }} {{ s.title }}</a>{% endfor %}
+      {% if v.region_obj %}<a class="tag tag-place" href="{{ root }}{{ v.region_obj.url }}">📍 {{ v.region_obj.name }}</a>{% endif %}
+      {% if v.date_h %}<time datetime="{{ v.published }}">{{ v.date_h }}</time>{% endif %}
+    </p>
+    <nav class="prevnext" aria-label="У цій серії">
+      {% if prev_v %}<a href="{{ root }}{{ prev_v.url }}" rel="prev">← Попереднє</a>{% endif %}
+      {% if next_v %}<a href="{{ root }}{{ next_v.url }}" rel="next">Наступне →</a>{% endif %}
+    </nav>
+    {% if desc_paragraphs %}
+    <div class="desc">
+      {% for p in desc_paragraphs %}<p>{{ p }}{% if loop.last and desc_truncated %}…{% endif %}</p>{% endfor %}
+    </div>
+    {% endif %}
+    <p class="watch-out"><a href="{{ v.watch_url }}" rel="noopener">{{ 'Повний опис і коментарі на YouTube' if v.embed else 'Відкрити в Медіатеці' }} ↗</a></p>
+  </div>
+</article>
+
+{% if neighbours %}
+<section class="block">
+  <div class="block-head">
+    <h2>Ще з серії «{{ v.series.title }}»</h2>
+    <a class="more" href="{{ root }}{{ v.series.url if v.section_obj.series|length > 1 else v.section_obj.url }}">Уся серія →</a>
+  </div>
+  {{ m.grid(neighbours, root, show_series=False) }}
+</section>
+{% endif %}
+
+{% if same_region %}
+<section class="block">
+  <div class="block-head">
+    <h2>Ще про цей край: {{ v.region_obj.name }}</h2>
+    <a class="more" href="{{ root }}{{ v.region_obj.url }}">Усе про область →</a>
+  </div>
+  {{ m.grid(same_region, root) }}
+</section>
+{% endif %}
+{% endblock %}

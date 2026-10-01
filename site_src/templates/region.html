@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m with context %}
+{% block main %}
+<section class="page-head region-head">
+  <div>
+    <p class="kicker">{% if map_section %}<a href="{{ root }}{{ map_section.url }}">🗺️ Мандруємо Україною</a>{% else %}Регіони України{% endif %}</p>
+    <h1>{{ reg.name }}</h1>
+    {% if reg.count %}
+    <p class="lead">У відеотеці про цей край: {{ what }}. Міста, природа, історія — подорожуйте, не виходячи з дому.</p>
+    {% else %}
+    <p class="lead">Матеріали про цей край готуються. Бібліотека поступово додає відео й презентації про кожен регіон України.</p>
+    {% endif %}
+  </div>
+  <div class="mini-map" aria-hidden="true">
+    <img src="{{ root }}assets/map-base.svg" alt="" width="800" height="530">
+    <svg viewBox="0 0 800 530">{% for p in map_paths if p.slug == reg.slug %}<path d="{{ p.d }}"/>{% endfor %}</svg>
+  </div>
+</section>
+
+{% if reg.videos %}
+<section class="block">
+  <div class="block-head"><h2>Відео</h2></div>
+  {{ m.grid(reg.videos, root) }}
+</section>
+{% endif %}
+
+{% if not reg.count and suggest %}
+<section class="block">
+  <div class="block-head">
+    <h2>Поки що — нові подорожі Україною</h2>
+    {% if map_section %}<a class="more" href="{{ root }}{{ map_section.url }}">Усі {{ map_section.videos|length }} →</a>{% endif %}
+  </div>
+  {{ m.grid(suggest, root) }}
+</section>
+{% endif %}
+
+{% if reg.presentations %}
+<section class="block" id="prezentatsii">
+  <div class="block-head"><h2>Презентації</h2></div>
+  {% for p in reg.presentations %}
+  <figure class="pres">
+    <div class="ratio"><iframe src="{{ p.preview }}" title="{{ p.title }}" loading="lazy" allowfullscreen></iframe></div>
+    <figcaption>{{ p.title }}</figcaption>
+  </figure>
+  {% endfor %}
+</section>
+{% endif %}
+
+<section class="block">
+  <div class="block-head"><h2>Усі регіони України</h2></div>
+  <ul class="regions regions-wide">
+    {% for r in regions %}
+    <li><a href="{{ root }}{{ r.url }}"{% if r is sameas reg %} aria-current="page"{% endif %}>{{ r.label }}{% if r.count %} <em>{{ r.count }}</em>{% endif %}</a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

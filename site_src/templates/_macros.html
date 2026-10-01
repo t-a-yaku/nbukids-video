@@ -1,0 +1,48 @@
+{% macro card(v, root, show_series=True) %}
+<a class="card" href="{{ root }}{{ v.url }}" data-title="{{ v.title|lower }}">
+  <span class="thumb"><img src="{{ v.thumb }}" alt="" width="320" height="180" loading="lazy" decoding="async"><span class="play" aria-hidden="true"></span></span>
+  <span class="card-body">
+    <span class="card-title">{{ v.title }}</span>
+    <span class="card-meta">{% if show_series %}{{ v.series.title }}{% if v.date_h %} · {% endif %}{% endif %}{{ v.date_h }}</span>
+    {% if v.region_obj %}<span class="chip">📍 {{ v.region_obj.label }}</span>{% endif %}
+  </span>
+</a>
+{% endmacro %}
+
+{% macro grid(videos, root, show_series=True) %}
+<div class="grid">
+{% for v in videos %}{{ card(v, root, show_series) }}{% endfor %}
+</div>
+{% endmacro %}
+
+{% macro filter_box(count) %}
+<div class="filter" data-filter>
+  <label for="f-in">Шукати серед {{ count }} відео на цій сторінці</label>
+  <input id="f-in" type="search" placeholder="Почніть вводити назву…" autocomplete="off">
+  <p class="filter-empty" hidden>Нічого не знайдено. Спробуйте інше слово або <a href="#" data-global>пошук по всій відеотеці</a>.</p>
+</div>
+{% endmacro %}
+
+{% macro ukraine_map(map, root, heading_level=2) %}
+<section class="mapbox" aria-labelledby="map-h">
+  <h{{ heading_level }} id="map-h">Мандруємо Україною: оберіть область</h{{ heading_level }}>
+  <div class="map-grid">
+    <figure class="map">
+      <svg viewBox="0 0 800 530" role="img" aria-labelledby="map-title">
+        <title id="map-title">Карта України: 24 області, Автономна Республіка Крим, міста Київ і Севастополь</title>
+        {% for p in map.paths %}
+        <a href="{{ root }}{{ p.reg.url }}" aria-label="{{ p.reg.name }}: {{ p.reg.count|plural('матеріал', 'матеріали', 'матеріалів') if p.reg.count else 'матеріали готуються' }}" data-name="{{ p.reg.name }}" data-count="{{ p.reg.count }}">
+          <path class="rg rg-{{ p.slug }}" d="{{ p.d }}"><title>{{ p.reg.name }}</title></path>
+        </a>
+        {% endfor %}
+      </svg>
+      <figcaption class="map-tip" aria-live="polite">Наведіть або торкніться області</figcaption>
+    </figure>
+    <ul class="regions">
+      {% for r in regions %}
+      <li><a href="{{ root }}{{ r.url }}">{{ r.label }}{% if r.count %} <em>{{ r.count }}</em>{% endif %}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endmacro %}

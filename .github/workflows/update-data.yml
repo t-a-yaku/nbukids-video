@@ -1,20 +1,37 @@
-name: Оновлення даних відеотеки
+name: Оновлення відеотеки
 
 on:
   schedule:
     - cron: "17 0 * * *"      # щодня о 03:17 за Києвом (00:17 UTC)
   workflow_dispatch:           # кнопка «Run workflow» для запуску вручну
+  push:                        # змінили вигляд сайту — перебудувати одразу, без збору даних
+    branches: [master]
+    paths:
+      - "scripts/build_site.py"
+      - "site_src/**"
+      - "_ukraine_map.html"
+      - "nbukids_hub.html"
+      - ".github/workflows/update-data.yml"
 
 permissions:
   contents: write              # щоб зберегти оновлений data/videos.json
-  id-token: write              # для безключового входу в Google Cloud
+  id-token: write              # для безключового входу в Google Cloud і для публікації сайту
+  pages: write                 # публікація сайту на GitHub Pages
 
 concurrency:
   group: update-data
   cancel-in-progress: false
 
+env:
+  # Адреса сайту. Після рішення про домен замінити, наприклад, на https://video.chl.kiev.ua/
+  SITE_URL: https://t-a-yaku.github.io/nbukids-video/
+  # «ні» — демоверсія: пошуковики не індексують, угорі смужка «Демонстраційна версія».
+  # «так» — лише коли сайт житиме на постійній адресі бібліотеки.
+  SITE_INDEX: "ні"
+
 jobs:
   collect:
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
@@ -62,3 +79,41 @@ jobs:
           fi
           git commit -m "Оновлення даних відеотеки $(date -u +%F)"
           git push origin "HEAD:$GITHUB_REF_NAME"
+
+  site:
+    needs: collect
+    if: ${{ !cancelled() }}      # навіть якщо збір не вдався, сайт збирається з останніх збережених даних
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}   # уже зі свіжими даними, які щойно зберіг збирач
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Зібрати сторінки сайту
+        run: python scripts/build_site.py
+
+      - name: Перевірити посилання і розмітку
+        run: python tests/test_site.py _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: site
+    if: ${{ !cancelled() && needs.site.result == 'success' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Опублікувати сайт
+        id: deployment
+        uses: actions/deploy-pages@v4

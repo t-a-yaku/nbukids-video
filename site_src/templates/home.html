@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m with context %}
+{% block main %}
+<section class="hero">
+  <h1>Відеотека Національної бібліотеки України для дітей</h1>
+  <p class="lead">{{ total_videos }} відео в одному місці: казки на ніч, віртуальні подорожі областями України, розповіді про професії. Шукайте за темою, серією чи областю на карті й дивіться тут же.</p>
+</section>
+
+<section class="tiles" aria-label="Розділи">
+  {% for s in sections %}
+  <a class="tile" href="{{ root }}{{ s.url }}" style="--c: {{ s.color or '#990000' }}">
+    <span class="tile-icon" aria-hidden="true">{{ s.icon }}</span>
+    <span class="tile-name">{{ s.name }}</span>
+    <span class="tile-desc">{{ s.description }}</span>
+    <span class="tile-count">{{ s.videos|length }} відео{% if s.presentations %} · {{ s.presentations|length }} презентацій{% endif %}</span>
+  </a>
+  {% endfor %}
+</section>
+
+{% if map_section %}{{ m.ukraine_map(map, root) }}{% endif %}
+
+<section class="block">
+  <div class="block-head"><h2>Нові відео</h2></div>
+  {{ m.grid(latest, root) }}
+</section>
+
+{% for s in sections %}
+<section class="block">
+  <div class="block-head">
+    <h2><span aria-hidden="true">{{ s.icon }}</span> {{ s.name }}</h2>
+    <a class="more" href="{{ root }}{{ s.url }}">Усі {{ s.videos|length }} →</a>
+  </div>
+  {{ m.grid(s.videos[:4], root) }}
+</section>
+{% endfor %}
+{% endblock %}

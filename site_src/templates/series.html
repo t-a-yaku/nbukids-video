@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "_macros.html" as m with context %}
+{% block main %}
+<section class="page-head" style="--c: {{ sec.color or '#990000' }}">
+  <p class="kicker"><a href="{{ root }}{{ sec.url }}"><span aria-hidden="true">{{ sec.icon }}</span> {{ sec.name }}</a></p>
+  <h1>{{ se.title }}</h1>
+  <p class="stat">{{ se.videos|length }} відео</p>
+</section>
+{% if sec.series|length > 1 %}
+<nav class="pills" aria-label="Інші серії розділу">
+  {% for other in sec.series.values() %}
+  <a href="{{ root }}{{ other.url }}"{% if other is sameas se %} aria-current="page"{% endif %}>{{ other.title }} <em>{{ other.videos|length }}</em></a>
+  {% endfor %}
+</nav>
+{% endif %}
+{{ m.filter_box(se.videos|length) }}
+{{ m.grid(se.videos, root, show_series=False) }}
+{% endblock %}
