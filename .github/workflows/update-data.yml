@@ -21,6 +21,8 @@ jobs:
       REGISTRY_SHEET_ID: 10QxS-Dq35VHgQTVmtcy-AJGcBdLIeGpL9_uSkyUyyX4
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}   # завжди найсвіжіша версія гілки, навіть під час повторного запуску
 
       - name: Вхід у Google Cloud без ключа (робот videoteka-reader)
         uses: google-github-actions/auth@v2
@@ -41,6 +43,16 @@ jobs:
 
       - name: Зберегти оновлені дані
         run: |
+          if git diff --quiet -- data/videos.json && git ls-files --error-unmatch data/videos.json >/dev/null 2>&1; then
+            echo "Даних без змін, коміт не потрібен"
+            exit 0
+          fi
+          # Поки збирач працював, у гілці міг з'явитися новіший коміт: беремо його і кладемо зверху свіжі дані
+          cp data/videos.json "$RUNNER_TEMP/videos.json"
+          git fetch --quiet origin "$GITHUB_REF_NAME"
+          git reset --quiet --hard "origin/$GITHUB_REF_NAME"
+          mkdir -p data
+          cp "$RUNNER_TEMP/videos.json" data/videos.json
           git config user.name "videoteka-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/videos.json
@@ -49,4 +61,4 @@ jobs:
             exit 0
           fi
           git commit -m "Оновлення даних відеотеки $(date -u +%F)"
-          git push
+          git push origin "HEAD:$GITHUB_REF_NAME"
