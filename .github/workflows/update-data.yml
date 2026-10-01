@@ -1,0 +1,52 @@
+name: Оновлення даних відеотеки
+
+on:
+  schedule:
+    - cron: "17 0 * * *"      # щодня о 03:17 за Києвом (00:17 UTC)
+  workflow_dispatch:           # кнопка «Run workflow» для запуску вручну
+
+permissions:
+  contents: write              # щоб зберегти оновлений data/videos.json
+  id-token: write              # для безключового входу в Google Cloud
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      REGISTRY_SHEET_ID: 10QxS-Dq35VHgQTVmtcy-AJGcBdLIeGpL9_uSkyUyyX4
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Вхід у Google Cloud без ключа (робот videoteka-reader)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/72740842734/locations/global/workloadIdentityPools/github/providers/github-repo
+          service_account: videoteka-reader@videotekachl.iam.gserviceaccount.com
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: Зібрати відео з усіх джерел реєстру
+        run: python scripts/collect.py
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+
+      - name: Зберегти оновлені дані
+        run: |
+          git config user.name "videoteka-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/videos.json
+          if git diff --cached --quiet; then
+            echo "Даних без змін, коміт не потрібен"
+            exit 0
+          fi
+          git commit -m "Оновлення даних відеотеки $(date -u +%F)"
+          git push
