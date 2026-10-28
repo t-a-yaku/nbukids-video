@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T05:12:41+00:00",
+ "generated_at": "2026-10-28T05:48:00+00:00",
  "sections": [
   {
    "name": "Географія України",
@@ -125,8 +125,7 @@
    "section": "Марафони читання",
    "type": "Медіатека: категорія",
    "map": "область з опису",
-   "ok": false,
-   "error": "HTTPSConnectionPool(host='mediateka.chl.kiev.ua', port=443): Max retries exceeded with url: /videoteka/natsionalnyi-marafon-chytannia-2026?format=feed&type=rss&limitstart=0 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mediateka.chl.kiev.ua', port=443) at 0x7f96492b1790>, 'Connection to medi",
+   "ok": true,
    "count": 897
   },
   {
@@ -135,8 +134,7 @@
    "section": "Читаємо разом",
    "type": "Медіатека: категорія",
    "map": "ні",
-   "ok": false,
-   "error": "HTTPSConnectionPool(host='mediateka.chl.kiev.ua', port=443): Max retries exceeded with url: /videoteka/knyzhky-ozhyvaiut?format=feed&type=rss&limitstart=0 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mediateka.chl.kiev.ua', port=443) at 0x7f96492b0d70>, 'Connection to mediateka.chl.kiev.ua ",
+   "ok": true,
    "count": 9
   },
   {
@@ -145,8 +143,7 @@
    "section": "Рідна мова",
    "type": "Медіатека: категорія",
    "map": "ні",
-   "ok": false,
-   "error": "HTTPSConnectionPool(host='mediateka.chl.kiev.ua', port=443): Max retries exceeded with url: /videoteka/bukvohraika-vpodobaika?format=feed&type=rss&limitstart=0 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mediateka.chl.kiev.ua', port=443) at 0x7f96492b1a60>, 'Connection to mediateka.chl.kie",
+   "ok": true,
    "count": 19
   },
   {
@@ -155,8 +152,7 @@
    "section": "Творчість",
    "type": "Медіатека: категорія",
    "map": "ні",
-   "ok": false,
-   "error": "HTTPSConnectionPool(host='mediateka.chl.kiev.ua', port=443): Max retries exceeded with url: /videoteka/maisternia-shistorii?format=feed&type=rss&limitstart=0 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mediateka.chl.kiev.ua', port=443) at 0x7f96492b2360>, 'Connection to mediateka.chl.kiev.",
+   "ok": true,
    "count": 9
   },
   {
@@ -23963,10 +23959,5 @@
    "preview": "https://drive.google.com/file/d/1z54E3C6z_RTdcz3BS5JlfOdRjTtII-ap/preview"
   }
  ],
- "errors": [
-  "«Національний марафон читання 2026»: HTTPSConnectionPool(host='mediateka.chl.kiev.ua', port=443): Max retries exceeded with url: /videoteka/natsionalnyi-marafon-chytannia-2026?format=feed&type=rss&limitstart=0 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mediateka.chl.kiev.ua', port=443) at 0x7f96492b1790>, 'Connection to medi",
-  "«Книжки оживають (Медіатека)»: HTTPSConnectionPool(host='mediateka.chl.kiev.ua', port=443): Max retries exceeded with url: /videoteka/knyzhky-ozhyvaiut?format=feed&type=rss&limitstart=0 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mediateka.chl.kiev.ua', port=443) at 0x7f96492b0d70>, 'Connection to mediateka.chl.kiev.ua ",
-  "«БуквоГрайка – Вподобайка»: HTTPSConnectionPool(host='mediateka.chl.kiev.ua', port=443): Max retries exceeded with url: /videoteka/bukvohraika-vpodobaika?format=feed&type=rss&limitstart=0 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mediateka.chl.kiev.ua', port=443) at 0x7f96492b1a60>, 'Connection to mediateka.chl.kie",
-  "«Майстерня ШІсторій»: HTTPSConnectionPool(host='mediateka.chl.kiev.ua', port=443): Max retries exceeded with url: /videoteka/maisternia-shistorii?format=feed&type=rss&limitstart=0 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mediateka.chl.kiev.ua', port=443) at 0x7f96492b2360>, 'Connection to mediateka.chl.kiev."
- ]
+ "errors": []
 }
