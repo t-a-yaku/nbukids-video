@@ -51,9 +51,11 @@ h1, h2, h3 { line-height: 1.25; }
 .search button { border: 0; background: var(--red2); color: #fff; padding: 0 18px; border-radius: 0 24px 24px 0; cursor: pointer; display: flex; align-items: center; }
 .search button:hover { background: var(--red); }
 
-.tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 0; }
+/* Смуга розділів: коли розділів багато, вони переходять на наступний рядок,
+   а на вузьких екранах гортаються пальцем — із тінню-підказкою з країв */
+.tabs { display: flex; flex-wrap: wrap; gap: 2px 4px; scrollbar-width: none; padding-bottom: 0; }
 .tabs::-webkit-scrollbar { display: none; }
-.tabs a { flex: none; display: flex; align-items: center; gap: 6px; padding: 10px 14px; color: var(--ink); text-decoration: none; font-weight: 600; border-bottom: 3px solid transparent; white-space: nowrap; }
+.tabs a { flex: none; display: flex; align-items: center; gap: 6px; padding: 10px 12px; color: var(--ink); text-decoration: none; font-weight: 600; border-bottom: 3px solid transparent; white-space: nowrap; }
 .tabs a em { font-style: normal; font-size: 12px; color: var(--muted); background: #f0f0f0; border-radius: 10px; padding: 1px 7px; }
 .tabs a:hover { border-bottom-color: var(--bd); }
 .tabs a[aria-current] { border-bottom-color: var(--c); color: var(--ink); }
@@ -180,6 +182,12 @@ main { padding-top: 8px; padding-bottom: 40px; min-height: 50vh; }
 .foot nav { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: flex-start; }
 
 @media (max-width: 860px) {
+  .tabs { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x proximity;
+          background: linear-gradient(90deg, #fff 55%, rgba(255,255,255,0)) 0 0 / 26px 100% no-repeat local,
+                      linear-gradient(270deg, #fff 55%, rgba(255,255,255,0)) 100% 0 / 26px 100% no-repeat local,
+                      radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.13), rgba(0,0,0,0)) 0 0 / 13px 100% no-repeat scroll,
+                      radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.13), rgba(0,0,0,0)) 100% 0 / 13px 100% no-repeat scroll; }
+  .tabs a { scroll-snap-align: start; }
   .map-grid { grid-template-columns: 1fr; }
   .watch { grid-template-columns: 1fr; gap: 14px; }
   .region-head { grid-template-columns: 1fr 140px; }
